@@ -35,12 +35,12 @@ int main() {
 		int tmp = moove;
 		int a,c;
 		char b, d;
-		cout << "Ход: " << M << endl;
+		cout << "Ход: " << moove + 1 << endl;
 		if (moove % 2 == 0) {
 			cout << "Ход белых" << endl;
 			cout << "Введите координаты фигуры и координаты хода: " << endl;
 			cin >> b >> a >> d >> c;
-			statistics.push_back("Ход: " + to_string(M) + " | " + b + to_string(a) + '-' + d + to_string(c));
+			statistics.push_back("Ход: " + to_string(moove+1) + " | " + b + to_string(a) + '-' + d + to_string(c));
 			a = 9 - a;
 			c = 9 - c;
 			test->moove_pice(a, b - 96, c, d - 96);
@@ -50,7 +50,7 @@ int main() {
 			cout << "Ход черных" << endl;
 			cout << "Введите координаты фигуры и координаты хода: " << endl;
 			cin >> b >> a >> d >> c;
-			statistics.push_back("Ход: " + to_string(M) + " | " + b + to_string(a) + '-' + d + to_string(c));
+			statistics.push_back("Ход: " + to_string(moove + 1) + " | " + b + to_string(a) + '-' + d + to_string(c));
 			test->moove_pice(a, b - 96, c, d - 96);
 			test->get_board();
 		}

@@ -11,6 +11,8 @@ using namespace std;
 extern vector <string> statistics;
 //calculate moove
 extern int M;
+//wrong turn pointer
+extern bool propusk;
 
 class chessboard {
 private:
@@ -255,11 +257,13 @@ public:
 	//moove figure by coordinates
 	void moove_pice(int x, int y, int c, int z) {
 		if (this->board[x + 1][y + 1] == 9 || this->board[c + 1][z + 1] == 9) {
+			propusk = 1;
 			cerr << "Wrong coordinates of the board" << endl;
 			system("pause");
 		}
 		//bug with mooves if no figure on cell ???????????????????????????????????????????????????????????????? WHAT TO DO MAN!???
 		else if (this->board[x + 1][y + 1] == 0) {
+			propusk = 1;
 			cerr << "Wrong turn, there no figure on this cell" << endl;
 			system("pause");
 		}

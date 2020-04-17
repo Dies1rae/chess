@@ -9,6 +9,8 @@ using namespace std;
 vector <string> statistics;
 //calc moove
 int M = 0;
+//wrong turn pointer
+bool propusk = 0;
 
 //create board and figure
 chessboard* test = new chessboard();
@@ -44,6 +46,11 @@ int main() {
 			a = 9 - a;
 			c = 9 - c;
 			test->moove_pice(a, b - 96, c, d - 96);
+			if (propusk == true) {
+				statistics.pop_back();
+				moove ++;
+				propusk = false;
+			}
 			test->get_board();
 		}
 		else if (moove % 2 != 0) {
@@ -52,6 +59,11 @@ int main() {
 			cin >> b >> a >> d >> c;
 			statistics.push_back("Õîä: " + to_string(moove + 1) + " | " + b + to_string(a) + '-' + d + to_string(c));
 			test->moove_pice(a, b - 96, c, d - 96);
+			if (propusk == true) {
+				statistics.pop_back();
+				moove ++;
+				propusk = false;
+			}
 			test->get_board();
 		}
 		//king dies action

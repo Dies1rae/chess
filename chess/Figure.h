@@ -12,7 +12,8 @@ private:
 	string root;
 public:
 	Figure() {}
-	Figure(int a, int b, int c, string d):coordx(a), coordy(b), type(c),root(d),alive(1) {}
+	Figure(int a, int b, int c, string d):coordx(a), coordy(b), type(c),root(d),alive(1) {
+	}
 	~Figure();
 
 	vector<int> get_figure() {
@@ -32,7 +33,7 @@ public:
 	void set_figure_live(bool a) {
 		this->alive = a;
 	}
-	void set_figure_root(string a) {
+	void set_figure_root(char a) {
 		this->root.clear();
 		this->root = a;
 	}
@@ -46,5 +47,6 @@ public:
 	string get_figure_root() {
 		return this->root;
 	}
+
 };
 

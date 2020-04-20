@@ -243,6 +243,7 @@ public:
 	}
 	//set figure function for complete movement 
 	void set_pice(int x, int y, int fig) {
+		//по отношению к массиву боард все координаты идут с увеличением на 1
 		if (this->board[x + 1][y + 1] == 9) {
 			cerr << "Wrong coordinates of the board" << endl;
 		}
@@ -254,74 +255,74 @@ public:
 		}
 	}
 
-	//moove figure by coordinates
+	//moove figure by coordinates (from x(2) and from y(E) --> to c(4) to z(E))
 	void moove_pice(int x, int y, int c, int z) {
+		//if its side of board
+		//по отношению к массиву боард все координаты идут с увеличением на 1, по отношению же к массиву figurein это просто координаты
 		if (this->board[x + 1][y + 1] == 9 || this->board[c + 1][z + 1] == 9) {
 			propusk = 1;
 			cerr << "Wrong coordinates of the board" << endl;
 			system("pause");
 		}
-		//bug with mooves if no figure on cell ???????????????????????????????????????????????????????????????? WHAT TO DO MAN!???
-		else if (this->board[x + 1][y + 1] == 0) {
+		//bug with mooves if no figure on cell 
+		else if (this->board[x+1][y+1] == 0) {
 			propusk = 1;
 			cerr << "Wrong turn, there no figure on this cell" << endl;
 			system("pause");
 		}
 		else {
 			//coordinate cout ---> cout << endl << x << ':' << y << ':' << c << ':' << z << endl;
-			//if there if a figure in cell
-			if (this->board[c + 1][z + 1] != 0) {
-				//Kill figure coord c-z
-				for (int ptr0 = 0; ptr0 < size(this->figurein); ptr0++) {
-					if (this->figurein[ptr0]->get_figure_coord()[0] == c && this->figurein[ptr0]->get_figure_coord()[1] == z) {
-						if (this->figurein[ptr0]->get_figure_alive() == true) {
-							this->figurein[ptr0]->set_figure_live(false);
+			for (int ptr0 = 0; ptr0 < size(this->figurein); ptr0++) {
+				if (this->figurein[ptr0]->get_figure_coord()[0] == x && this->figurein[ptr0]->get_figure_coord()[1] == y) {
+					if (attack_and_movement(x, y, c, z, this->figurein[ptr0]->get_figure_type())[0] == 0) {
+						propusk = 1;
+						cerr << "Wrong turn" << endl;
+						system("pause");
+					}
+					else {
+						//if there if a figure in cell
+						if (this->board[c + 1][z + 1] != 0) {
+							//Kill figure coord c-z
+							for (int ptr0 = 0; ptr0 < size(this->figurein); ptr0++) {
+								if (this->figurein[ptr0]->get_figure_coord()[0] == c && this->figurein[ptr0]->get_figure_coord()[1] == z) {
+									if (this->figurein[ptr0]->get_figure_alive() == true) {
+										this->figurein[ptr0]->set_figure_live(false);
+									}
+									else {
+										cerr << "Warning its a bug!" << endl;
+										system("pause");
+									}
+								}
+							}
+							//move figure from xy->cz
+							for (int ptr0 = 0; ptr0 < size(this->figurein); ptr0++) {
+								if (this->figurein[ptr0]->get_figure_coord()[0] == x && this->figurein[ptr0]->get_figure_coord()[1] == y) {
+									this->figurein[ptr0]->set_figure_coord(c, z);
+									set_pice(c, z, this->figurein[ptr0]->get_figure_type());
+								}
+							}
+							this->board[x + 1][y + 1] = 0;
 						}
+						//and there is not(done)
 						else {
-							cerr << "Warning its a bug!" << endl;
-							system("pause");
+							for (int ptr0 = 0; ptr0 < size(this->figurein); ptr0++) {
+								if (this->figurein[ptr0]->get_figure_coord()[0] == x && this->figurein[ptr0]->get_figure_coord()[1] == y) {
+									this->figurein[ptr0]->set_figure_coord(c, z);
+									set_pice(c, z, this->figurein[ptr0]->get_figure_type());
+								}
+							}
+							this->board[x + 1][y + 1] = 0;
 						}
 					}
-				}
-				//move figure from xy->cz
-				for (int ptr0 = 0; ptr0 < size(this->figurein); ptr0++) {
-					if (this->figurein[ptr0]->get_figure_coord()[0] == x && this->figurein[ptr0]->get_figure_coord()[1] == y) {
-						this->figurein[ptr0]->set_figure_coord(c, z);
-						set_pice(c, z, this->figurein[ptr0]->get_figure_type());
+					//control king alive status
+					get_king_alive();
 					}
 				}
-				this->board[x + 1][y + 1] = 0;
 			}
-			//and there is not(done)
-			else {
-				for (int ptr0 = 0; ptr0 < size(this->figurein); ptr0++) {
-					if (this->figurein[ptr0]->get_figure_coord()[0] == x && this->figurein[ptr0]->get_figure_coord()[1] == y) {
-						this->figurein[ptr0]->set_figure_coord(c, z);
-						set_pice(c, z, this->figurein[ptr0]->get_figure_type());
-					}
-				}
-				this->board[x + 1][y + 1] = 0;
-			}
-		}
-		//control king alive status
-		get_king_alive();
 		system("CLS");
 	}
 
-	//remove dead bodyes from chessboard
-	void if_figure_dead() {
-		for (int ptr0 = 0; ptr0 < size(this->figurein); ptr0++) {
-			if (this->figurein[ptr0]->get_figure_alive() == false) {
-				this->figurein[ptr0]->set_figure_coord(0, 0);
-				this->figurein[ptr0]->set_figure_root("+");
-				//this->figurein[ptr0]->~Figure();
-			}
-		}
-	}
-
-
-
-	//BOAR RULES
+	//BOARD RULES
 	//king alive status
 	vector <bool> get_king_alive() {
 		vector <bool> kings;
@@ -331,6 +332,122 @@ public:
 			}
 		}
 		return kings;
+	}
+
+	//remove dead bodyes from chessboard
+	void if_figure_dead() {
+		for (int ptr0 = 0; ptr0 < size(this->figurein); ptr0++) {
+			if (this->figurein[ptr0]->get_figure_alive() == false) {
+				this->figurein[ptr0]->set_figure_coord(0, 0);
+				this->figurein[ptr0]->set_figure_root('+');
+				//this->figurein[ptr0]->~Figure();
+			}
+		}
+	}
+
+	//Figure mooves and rules (from x(2) and from y(E) --> to c(4) to z(E))
+	vector <int> attack_and_movement(int x, int y, int c, int z, int t) {
+		//first element of this mass is bool can figure moove or not. And every 1-3-5 is X and every 2-4-6 is Y for possible moove
+		vector <int> res;
+		res.push_back(0);
+		//pawn ---WORKS FINE
+		if (t == 1 || t == -1) {
+			if (y == z && abs(c - x) == 2) {
+				res.push_back(c);
+				res.push_back(z);
+			}
+			else if (y == z && abs(c - x) == 1) {
+				res.push_back(c);
+				res.push_back(z);
+			}
+			else if ((y + 1 == z ||y - 1 == z) && abs(c - x) == 1 && this->board[c + 1][z + 1] != 0 && this->board[c + 1][z + 1] != 9) {
+				res.push_back(c);
+				res.push_back(z);
+			}
+		}
+		//horseman ---WORKS FINE
+		if (t == 2 || t == -2) {
+			if (abs((x - c) * (y - z)) == 2) {
+				res.push_back(c);
+				res.push_back(z);
+			}
+		}
+		//bishop ---WORKS FINE
+		if (t == 3 || t == -3) {
+			// If pawn is at angle 
+			// 45 or 225 degree from 
+			// bishop's Position 
+			if (c - x == z - y) {
+				res.push_back(c);
+				res.push_back(z);
+			}
+			// If pawn is at angle 
+			// 135 or 315 degree from 
+			// bishop's Position 
+			else if (-c + x == z - y) {
+				res.push_back(c);
+				res.push_back(z);
+			}
+		}
+		//ROOK ---WORKS FINE
+		if (t == 4 || t == -4) {
+			//add all variants (not board) to vector
+			for (int ptr0 = 1; ptr0 < size(this->board) - 1; ptr0++) {
+				for (int ptr1 = 1; ptr1 < size(this->board[ptr0])-1; ptr1++) {
+					if (ptr0 == x) {
+						res.push_back(ptr0);
+						res.push_back(ptr1);
+					}
+					if (ptr1 == y) {
+						res.push_back(ptr0);
+						res.push_back(ptr1);
+					}
+				}
+			}
+		}
+		//QUEEN ---WORKS FINE
+		if (t == 5 || t == -5) {
+			if (((abs(x - c) == 1) && ((y - z) == 0)) || ((abs(y - z) == 1) && ((x - c) == 0)) || ((abs(x - c) == 1) && (abs(y - z) == 1))) {
+				res.push_back(c);
+				res.push_back(z);
+			}
+			else if (c - x == z - y) {
+				res.push_back(c);
+				res.push_back(z);
+			}
+			else if (-c + x == z - y) {
+				res.push_back(c);
+				res.push_back(z);
+			}
+			for (int ptr0 = 1; ptr0 < size(this->board) - 1; ptr0++) {
+				for (int ptr1 = 1; ptr1 < size(this->board[ptr0]) - 1; ptr1++) {
+					if (ptr0 == x) {
+						res.push_back(ptr0);
+						res.push_back(ptr1);
+					}
+					if (ptr1 == y) {
+						res.push_back(ptr0);
+						res.push_back(ptr1);
+					}
+				}
+			}
+		}
+		//KING ---WORKS FINE
+		if (t == 6 || t == -6) {
+			//add all variants (not board) to vector
+			if (((abs(x - c) == 1) && ((y - z) == 0)) || ((abs(y - z) == 1) && ((x - c) == 0)) || ((abs(x - c) == 1) && (abs(y - z) == 1))) {
+				res.push_back(c);
+				res.push_back(z);
+			}
+		}
+
+		//check if figure t can move from xy to cz
+		for (int ptr0 = 1; ptr0 < res.size(); ptr0++) {
+			if (ptr0 % 2 != 0 && (res[ptr0] == c && res[ptr0 + 1] == z)) {
+				res[0] = 1;
+			}
+		}
+		return res;
 	}
 };
 

@@ -24,7 +24,7 @@ int main() {
 	cor.X = 50;
 	cor.Y = 0;
 	SetConsoleCursorPosition(hConsole, cor);
-	SetConsoleTextAttribute(hConsole, 15);
+	SetConsoleTextAttribute(hConsole, BACKGROUND_RED| 15);
 	cout << "**CHESS**" << setw(100) << "...by Dies_Irae" << endl;
 	//language
 	SetConsoleOutputCP(1251);

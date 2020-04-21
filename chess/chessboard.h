@@ -54,7 +54,7 @@ public:
 		//printing statistics, board and figure to cout
 		for (int ptr1 = 0; ptr1 < size(this->board); ptr1++) {
 			for (int ptr2 = 0; ptr2 < size(this->board); ptr2++) {
-				SetConsoleTextAttribute(hConsole, 7);
+				SetConsoleTextAttribute(hConsole,7);
 				//outside contur
 				if ((ptr1 == 0 || ptr1 == 11 || ptr2 == 0 || ptr2 == 11) || ((ptr1 == 1 && ptr2 == 1) || (ptr1 == 1 && ptr2 == 10)) || ((ptr1 == 10 && ptr2 == 1) || (ptr1 == 10 && ptr2 == 10))) {
 					SetConsoleTextAttribute(hConsole, 7);
@@ -139,18 +139,18 @@ public:
 				}
 				//A-H TOP and DOWN
 				else if ((ptr1 == 1 && ptr2 > 1) || (ptr1 == 10 && ptr2 > 1)) {
-					SetConsoleTextAttribute(hConsole, 3);
+					SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN| BACKGROUND_BLUE | FOREGROUND_INTENSITY | 1);
 					cout << setw(4) << char(63 + ptr2) << setw(4);
 				}
 				//1-8 LEFT and RIGHT
 				else if ((ptr2 == 1 && ptr1 > 1) || (ptr2 == 10 && ptr1 > 1)) {
-					SetConsoleTextAttribute(hConsole, 3);
+					SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | BACKGROUND_BLUE | FOREGROUND_INTENSITY | 1);
 					cout << setw(4) << 10 - ptr1 << setw(4);
 				}
 				//chess figure
 				else {
 					if (ptr1 % 2 == 0 && ptr2 % 2 == 0) {
-						SetConsoleTextAttribute(hConsole, 7);
+						SetConsoleTextAttribute(hConsole, BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED);
 						for (int ptr0 = 0; ptr0 < size(this->figurein); ptr0++) {
 							if (ptr1 - 1 == this->figurein[ptr0]->get_figure_coord()[0] && ptr2 - 1 == this->figurein[ptr0]->get_figure_coord()[1]) {
 								if (this->figurein[ptr0]->get_figure_alive() == 1) {
@@ -189,7 +189,7 @@ public:
 						}
 					}
 					else if (ptr1 % 2 != 0 && ptr2 % 2 != 0) {
-						SetConsoleTextAttribute(hConsole, 7);
+						SetConsoleTextAttribute(hConsole, BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED );
 						for (int ptr0 = 0; ptr0 < size(this->figurein); ptr0++) {
 							if (ptr1 - 1 == this->figurein[ptr0]->get_figure_coord()[0] && ptr2 - 1 == this->figurein[ptr0]->get_figure_coord()[1]) {
 								if (this->figurein[ptr0]->get_figure_alive() == 1) {

@@ -24,6 +24,7 @@ int main() {
 	cor.X = 50;
 	cor.Y = 0;
 	SetConsoleCursorPosition(hConsole, cor);
+	SetConsoleTextAttribute(hConsole, 15);
 	cout << "**CHESS**" << setw(100) << "...by Dies_Irae" << endl;
 	//language
 	SetConsoleOutputCP(1251);
@@ -33,8 +34,7 @@ int main() {
 	test->get_board();
 	//main game loop
 	for (int moove = 0; moove < 100000; moove ++) {
-		M++;
-		int tmp = moove;
+		
 		int a,c;
 		char b, d;
 		cout << "’од: " << moove + 1 << endl;
@@ -47,6 +47,7 @@ int main() {
 			c = 9 - c;
 			test->moove_pice(a, b - 96, c, d - 96);
 			if (propusk == true) {
+				M++;
 				statistics.pop_back();
 				moove ++;
 				propusk = false;
@@ -58,14 +59,18 @@ int main() {
 			cout << "¬ведите координаты фигуры и координаты хода: " << endl;
 			cin >> b >> a >> d >> c;
 			statistics.push_back("’од: " + to_string(moove + 1) + " | " + b + to_string(a) + '-' + d + to_string(c));
+			a = 9 - a;
+			c = 9 - c;
 			test->moove_pice(a, b - 96, c, d - 96);
 			if (propusk == true) {
+				M++;
 				statistics.pop_back();
 				moove ++;
 				propusk = false;
 			}
 			test->get_board();
 		}
+		M++;
 		//king dies action
 		if (test->get_king_alive()[0] == false) {
 			system("CLS");

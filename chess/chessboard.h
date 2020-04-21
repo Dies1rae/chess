@@ -54,8 +54,10 @@ public:
 		//printing statistics, board and figure to cout
 		for (int ptr1 = 0; ptr1 < size(this->board); ptr1++) {
 			for (int ptr2 = 0; ptr2 < size(this->board); ptr2++) {
+				SetConsoleTextAttribute(hConsole, 7);
 				//outside contur
 				if ((ptr1 == 0 || ptr1 == 11 || ptr2 == 0 || ptr2 == 11) || ((ptr1 == 1 && ptr2 == 1) || (ptr1 == 1 && ptr2 == 10)) || ((ptr1 == 10 && ptr2 == 1) || (ptr1 == 10 && ptr2 == 10))) {
+					SetConsoleTextAttribute(hConsole, 7);
 					//left board and statistics
 					if (ptr2 == 11) {
 						if (ptr1 == 0) {
@@ -131,28 +133,73 @@ public:
 					}
 					//just a board(right, top, bottom)
 					else {
+						SetConsoleTextAttribute(hConsole, 7);
 						cout << setw(4) << '*' << setw(4);
 					}
 				}
 				//A-H TOP and DOWN
 				else if ((ptr1 == 1 && ptr2 > 1) || (ptr1 == 10 && ptr2 > 1)) {
+					SetConsoleTextAttribute(hConsole, 3);
 					cout << setw(4) << char(63 + ptr2) << setw(4);
 				}
 				//1-8 LEFT and RIGHT
 				else if ((ptr2 == 1 && ptr1 > 1) || (ptr2 == 10 && ptr1 > 1)) {
+					SetConsoleTextAttribute(hConsole, 3);
 					cout << setw(4) << 10 - ptr1 << setw(4);
 				}
 				//chess figure
 				else {
-					for (int ptr0 = 0; ptr0 < size(this->figurein); ptr0++) {
-						if (ptr1 - 1 == this->figurein[ptr0]->get_figure_coord()[0] && ptr2 - 1 == this->figurein[ptr0]->get_figure_coord()[1]) {
-							if (this->figurein[ptr0]->get_figure_alive() == 1) {
-								cout << setw(4) << this->figurein[ptr0]->get_figure_root() << setw(4);
+					if (ptr1 % 2 == 0 && ptr2 % 2 == 0) {
+						SetConsoleTextAttribute(hConsole, 7);
+						for (int ptr0 = 0; ptr0 < size(this->figurein); ptr0++) {
+							if (ptr1 - 1 == this->figurein[ptr0]->get_figure_coord()[0] && ptr2 - 1 == this->figurein[ptr0]->get_figure_coord()[1]) {
+								if (this->figurein[ptr0]->get_figure_alive() == 1) {
+									cout << setw(4) << this->figurein[ptr0]->get_figure_root() << setw(4);
+								}
 							}
 						}
+						if (this->board[ptr1][ptr2] == 0) {
+							cout << setw(4) << this->board[ptr1][ptr2] << setw(4);
+						}
 					}
-					if (this->board[ptr1][ptr2] == 0) {
-						cout << setw(4) << this->board[ptr1][ptr2] << setw(4);
+					else if (ptr1 % 2 == 0 && ptr2 % 2 != 0) {
+						SetConsoleTextAttribute(hConsole, 4);
+						for (int ptr0 = 0; ptr0 < size(this->figurein); ptr0++) {
+							if (ptr1 - 1 == this->figurein[ptr0]->get_figure_coord()[0] && ptr2 - 1 == this->figurein[ptr0]->get_figure_coord()[1]) {
+								if (this->figurein[ptr0]->get_figure_alive() == 1) {
+									cout << setw(4) << this->figurein[ptr0]->get_figure_root() << setw(4);
+								}
+							}
+						}
+						if (this->board[ptr1][ptr2] == 0) {
+							cout << setw(4) << this->board[ptr1][ptr2] << setw(4);
+						}
+					}
+					if (ptr1 % 2 != 0 && ptr2 % 2 == 0) {
+						SetConsoleTextAttribute(hConsole, 4);
+						for (int ptr0 = 0; ptr0 < size(this->figurein); ptr0++) {
+							if (ptr1 - 1 == this->figurein[ptr0]->get_figure_coord()[0] && ptr2 - 1 == this->figurein[ptr0]->get_figure_coord()[1]) {
+								if (this->figurein[ptr0]->get_figure_alive() == 1) {
+									cout << setw(4) << this->figurein[ptr0]->get_figure_root() << setw(4);
+								}
+							}
+						}
+						if (this->board[ptr1][ptr2] == 0) {
+							cout << setw(4) << this->board[ptr1][ptr2] << setw(4);
+						}
+					}
+					else if (ptr1 % 2 != 0 && ptr2 % 2 != 0) {
+						SetConsoleTextAttribute(hConsole, 7);
+						for (int ptr0 = 0; ptr0 < size(this->figurein); ptr0++) {
+							if (ptr1 - 1 == this->figurein[ptr0]->get_figure_coord()[0] && ptr2 - 1 == this->figurein[ptr0]->get_figure_coord()[1]) {
+								if (this->figurein[ptr0]->get_figure_alive() == 1) {
+									cout << setw(4) << this->figurein[ptr0]->get_figure_root() << setw(4);
+								}
+							}
+						}
+						if (this->board[ptr1][ptr2] == 0) {
+							cout << setw(4) << this->board[ptr1][ptr2] << setw(4);
+						}
 					}
 				}
 			}
@@ -274,7 +321,8 @@ public:
 			//coordinate cout ---> cout << endl << x << ':' << y << ':' << c << ':' << z << endl;
 			for (int ptr0 = 0; ptr0 < size(this->figurein); ptr0++) {
 				if (this->figurein[ptr0]->get_figure_coord()[0] == x && this->figurein[ptr0]->get_figure_coord()[1] == y) {
-					if (attack_and_movement(x, y, c, z, this->figurein[ptr0]->get_figure_type())[0] == 0) {
+					if ((attack_and_movement(x, y, c, z, this->figurein[ptr0]->get_figure_type())[0] == 0) || (M % 2 == 0 && this->figurein[ptr0]->get_figure_type() < 0) || (M % 2 != 0 && this->figurein[ptr0]->get_figure_type() > 0)) {
+						
 						propusk = 1;
 						cerr << "Wrong turn" << endl;
 						system("pause");
@@ -356,11 +404,11 @@ public:
 				res.push_back(c);
 				res.push_back(z);
 			}
-			else if (y == z && abs(c - x) == 1) {
+			if (y == z && abs(c - x) == 1) {
 				res.push_back(c);
 				res.push_back(z);
 			}
-			else if ((y + 1 == z ||y - 1 == z) && abs(c - x) == 1 && this->board[c + 1][z + 1] != 0 && this->board[c + 1][z + 1] != 9) {
+			if ((y + 1 == z || y - 1 == z) && abs(c - x) == 1) {
 				res.push_back(c);
 				res.push_back(z);
 			}

@@ -66,70 +66,70 @@ public:
 						}
 						else if (ptr1 == 1) {
 							if (statistics.size() >= 2) {
-								cout << setw(4) << '*' << setw(4) << setw(8) << '|' << statistics[ptr1 - 1] << setw(11) << '|' << statistics[ptr1];
+								cout << setw(4) << '*' << setw(4) << setw(8) << '|' << statistics[ptr1 - 1] << setw(11) << " " << statistics[ptr1];
 							}
 							else {
-								cout << setw(4) << '*' << setw(4) << setw(8) << '|' << setw(20) << "                        " << '|' << "                        ";
+								cout << setw(4) << '*' << setw(4) << setw(8) << '|' << setw(20) << "                        "  << "                        ";
 							}
 						}
 						else if (ptr1 == 2) {
 							if (statistics.size() >= 4) {
-								cout << setw(4) << '*' << setw(4) << setw(8) << '|' << statistics[ptr1] << setw(11) << '|' << statistics[ptr1 + 1];
+								cout << setw(4) << '*' << setw(4) << setw(8) << '|' << statistics[ptr1] << setw(11) << " " << statistics[ptr1 + 1];
 							}
 							else {
-								cout << setw(4) << '*' << setw(4) << setw(8) << '|' << setw(20) << "                        " << '|' << "                        ";
+								cout << setw(4) << '*' << setw(4) << setw(8) << '|' << setw(20) << "                        "  << "                        ";
 							}
 						}
 						else if (ptr1 == 3) {
 							if (statistics.size() >= 6) {
-								cout << setw(4) << '*' << setw(4) << setw(8) << '|' << statistics[ptr1 + 1] << setw(11) << '|' << statistics[ptr1 + 2];
+								cout << setw(4) << '*' << setw(4) << setw(8) << '|' << statistics[ptr1 + 1] << setw(11) << " " << statistics[ptr1 + 2];
 							}
 							else {
-								cout << setw(4) << '*' << setw(4) << setw(8) << '|' << setw(20) << "                        " << '|' << "                        ";
+								cout << setw(4) << '*' << setw(4) << setw(8) << '|' << setw(20) << "                        "  << "                        ";
 							}
 						}
 						else if (ptr1 == 4) {
 							if (statistics.size() >= 8) {
-								cout << setw(4) << '*' << setw(4) << setw(8) << '|' << statistics[ptr1 + 2] << setw(11) << '|' << statistics[ptr1 + 3];
+								cout << setw(4) << '*' << setw(4) << setw(8) << '|' << statistics[ptr1 + 2] << setw(11) << " " <<  statistics[ptr1 + 3];
 							}
 							else {
-								cout << setw(4) << '*' << setw(4) << setw(8) << '|' << setw(20) << "                        " << '|' << "                        ";
+								cout << setw(4) << '*' << setw(4) << setw(8) << '|' << setw(20) << "                        "  << "                        ";
 							}
 						}
 						else if (ptr1 == 5) {
 							if (statistics.size() >= 10) {
-								cout << setw(4) << '*' << setw(4) << setw(8) << '|' << statistics[ptr1 + 3] << setw(11) << '|' << statistics[ptr1 + 4];
+								cout << setw(4) << '*' << setw(4) << setw(8) << '|' << statistics[ptr1 + 3] << setw(11) << " " << statistics[ptr1 + 4];
 							}
 							else {
-								cout << setw(4) << '*' << setw(4) << setw(8) << '|' << setw(20) << "                        " << '|' << "                        ";
+								cout << setw(4) << '*' << setw(4) << setw(8) << '|' << setw(20) << "                        "  << "                        ";
 							}
 						}
 						else if (ptr1 == 6) {
 							if (statistics.size() >= 12) {
-								cout << setw(4) << '*' << setw(4) << setw(8) << '|' << statistics[ptr1 + 4] << setw(11) << '|' << statistics[ptr1 + 5];
+								cout << setw(4) << '*' << setw(4) << setw(8) << '|' << statistics[ptr1 + 4] << setw(11) << " " << statistics[ptr1 + 5];
 							}
 							else {
-								cout << setw(4) << '*' << setw(4) << setw(8) << '|' << setw(20) << "                        " << '|' << "                        ";
+								cout << setw(4) << '*' << setw(4) << setw(8) << '|' << setw(20) << "                        "  << "                        ";
 							}
 						}
 						else if (ptr1 == 7) {
 							if (statistics.size() >= 14) {
-								cout << setw(4) << '*' << setw(4) << setw(8) << '|' << statistics[ptr1 + 5] << setw(11) << '|' << statistics[ptr1 + 6];
+								cout << setw(4) << '*' << setw(4) << setw(8) << '|' << statistics[ptr1 + 5] << setw(11) << " " << statistics[ptr1 + 6];
 							}
 							else {
-								cout << setw(4) << '*' << setw(4) << setw(8) << '|' << setw(20) << "                        " << '|' << "                        ";
+								cout << setw(4) << '*' << setw(4) << setw(8) << '|' << setw(20) << "                        "  << "                        ";
 							}
 						}
 						else if (ptr1 == 7) {
 							if (statistics.size() >= 16) {
-								cout << setw(4) << '*' << setw(4) << setw(8) << '|' << statistics[ptr1 + 6] << setw(11) << '|' << statistics[ptr1 + 7];
+								cout << setw(4) << '*' << setw(4) << setw(8) << '|' << statistics[ptr1 + 6] << setw(11) << " " << statistics[ptr1 + 7];
 							}
 							else {
-								cout << setw(4) << '*' << setw(4) << setw(8) << '|' << setw(20) << "                        " << '|' << "                        ";
+								cout << setw(4) << '*' << setw(4) << setw(8) << '|' << setw(20) << "                        " << "                        ";
 							}
 						}
 						else {
-							cout << setw(4) << '*' << setw(4) << setw(8) << '|' << setw(20) << "" << setw(5) << '|' << "";
+							cout << setw(4) << '*' << setw(4) << setw(8) << '|' << setw(20) << "" << setw(5)  << "";
 						}
 					}
 					//just a board(right, top, bottom)
@@ -322,8 +322,7 @@ public:
 			//coordinate cout ---> cout << endl << x << ':' << y << ':' << c << ':' << z << endl;
 			for (int ptr0 = 0; ptr0 < size(this->figurein); ptr0++) {
 				if (this->figurein[ptr0]->get_figure_coord()[0] == x && this->figurein[ptr0]->get_figure_coord()[1] == y) {
-					if ((attack_and_movement(x, y, c, z, this->figurein[ptr0]->get_figure_type())[0] == 0) || (M % 2 == 0 && this->figurein[ptr0]->get_figure_type() < 0) || (M % 2 != 0 && this->figurein[ptr0]->get_figure_type() > 0)) {
-						
+					if ((attack_and_movement(x, y, c, z, this->figurein[ptr0]->get_figure_type())[0] == 0) || (M % 2 == 0 && this->figurein[ptr0]->get_figure_type() < 0) || (M % 2 != 0 && this->figurein[ptr0]->get_figure_type() > 0) ) {
 						propusk = 1;
 						cerr << "Wrong turn" << endl;
 						system("pause");

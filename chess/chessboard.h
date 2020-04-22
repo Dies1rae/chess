@@ -2,11 +2,12 @@
 #include <iostream>
 #include <iomanip>
 #include <vector>
-#include"Figure.h"
+#include "Figure.h"
 #include <vector>
 #include <Windows.h>
 using namespace std;
 
+//ALL EXTERN DATA
 //for statistics
 extern vector <string> statistics;
 //calculate moove
@@ -37,7 +38,7 @@ public:
 		}
 	}
 	//destruct
-	~chessboard();
+	~chessboard() {}
 
 	//every renew and get board
 	void get_board() {
@@ -496,6 +497,13 @@ public:
 			}
 		}
 		return res;
+	}
+	//END_GAME
+	void end_game() {
+		stat_clear(9);
+		set_pice_newgame();
+		statistics.clear();
+		M = 0;
 	}
 };
 

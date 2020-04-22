@@ -11,10 +11,16 @@ private:
 	bool alive;
 	string root;
 public:
-	Figure() {}
+	Figure() {
+		this->coordx = 0;
+		this->coordy = 0;
+		this->type = 0;
+		this->alive = 0;
+		this->root = "";
+	}
 	Figure(int a, int b, int c, string d):coordx(a), coordy(b), type(c),root(d),alive(1) {
 	}
-	~Figure();
+	~Figure() {}
 
 	vector<int> get_figure() {
 		vector <int> tmp = {this->coordx, this->coordy, this->type, this->alive};

@@ -320,6 +320,7 @@ public:
 		}
 		else {
 			//coordinate cout ---> cout << endl << x << ':' << y << ':' << c << ':' << z << endl;
+			//THINK ABOUT ATTACKING YOURESELF!!!!!!!!!!!!!!!! -- || ((this->board[x+1][y+1] > 0 && this->board[c+1][z+1] > 0) || (this->board[x + 1][y + 1] < 0 && this->board[c + 1][z + 1] < 0))!!!
 			for (int ptr0 = 0; ptr0 < size(this->figurein); ptr0++) {
 				if (this->figurein[ptr0]->get_figure_coord()[0] == x && this->figurein[ptr0]->get_figure_coord()[1] == y) {
 					if ((attack_and_movement(x, y, c, z, this->figurein[ptr0]->get_figure_type())[0] == 0) || (M % 2 == 0 && this->figurein[ptr0]->get_figure_type() < 0) || (M % 2 != 0 && this->figurein[ptr0]->get_figure_type() > 0) ) {
@@ -330,26 +331,32 @@ public:
 					else {
 						//if there if a figure in cell
 						if (this->board[c + 1][z + 1] != 0) {
-							//Kill figure coord c-z
-							for (int ptr0 = 0; ptr0 < size(this->figurein); ptr0++) {
-								if (this->figurein[ptr0]->get_figure_coord()[0] == c && this->figurein[ptr0]->get_figure_coord()[1] == z) {
-									if (this->figurein[ptr0]->get_figure_alive() == true) {
-										this->figurein[ptr0]->set_figure_live(false);
-									}
-									else {
-										cerr << "Warning its a bug!" << endl;
-										system("pause");
+							if ((this->board[x + 1][y + 1] > 0 && this->board[c + 1][z + 1] < 0) || (this->board[x + 1][y + 1] < 0 && this->board[c + 1][z + 1] > 0)) {
+								//Kill figure coord c-z
+								for (int ptr0 = 0; ptr0 < size(this->figurein); ptr0++) {
+									if (this->figurein[ptr0]->get_figure_coord()[0] == c && this->figurein[ptr0]->get_figure_coord()[1] == z) {
+										if (this->figurein[ptr0]->get_figure_alive() == true) {
+											this->figurein[ptr0]->set_figure_live(false);
+											this->figurein[ptr0]->set_figure_coord(0, 0);
+											this->board[c + 1][z + 1] = 0;
+										}
 									}
 								}
-							}
-							//move figure from xy->cz
-							for (int ptr0 = 0; ptr0 < size(this->figurein); ptr0++) {
-								if (this->figurein[ptr0]->get_figure_coord()[0] == x && this->figurein[ptr0]->get_figure_coord()[1] == y) {
-									this->figurein[ptr0]->set_figure_coord(c, z);
-									set_pice(c, z, this->figurein[ptr0]->get_figure_type());
+
+								//move figure from xy->cz
+								for (int ptr0 = 0; ptr0 < size(this->figurein); ptr0++) {
+									if (this->figurein[ptr0]->get_figure_coord()[0] == x && this->figurein[ptr0]->get_figure_coord()[1] == y) {
+										this->figurein[ptr0]->set_figure_coord(c, z);
+										set_pice(c, z, this->figurein[ptr0]->get_figure_type());
+									}
 								}
+								this->board[x + 1][y + 1] = 0;
 							}
-							this->board[x + 1][y + 1] = 0;
+							else {
+								propusk = 1;
+								cerr << "Wrong turn" << endl;
+								system("pause");
+							}
 						}
 						//and there is not(done)
 						else {

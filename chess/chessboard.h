@@ -320,7 +320,6 @@ public:
 		}
 		else {
 			//coordinate cout ---> cout << endl << x << ':' << y << ':' << c << ':' << z << endl;
-			//THINK ABOUT ATTACKING YOURESELF!!!!!!!!!!!!!!!! -- || ((this->board[x+1][y+1] > 0 && this->board[c+1][z+1] > 0) || (this->board[x + 1][y + 1] < 0 && this->board[c + 1][z + 1] < 0))!!!
 			for (int ptr0 = 0; ptr0 < size(this->figurein); ptr0++) {
 				if (this->figurein[ptr0]->get_figure_coord()[0] == x && this->figurein[ptr0]->get_figure_coord()[1] == y) {
 					if ((attack_and_movement(x, y, c, z, this->figurein[ptr0]->get_figure_type())[0] == 0) || (M % 2 == 0 && this->figurein[ptr0]->get_figure_type() < 0) || (M % 2 != 0 && this->figurein[ptr0]->get_figure_type() > 0) ) {
@@ -342,12 +341,20 @@ public:
 										}
 									}
 								}
-
 								//move figure from xy->cz
 								for (int ptr0 = 0; ptr0 < size(this->figurein); ptr0++) {
 									if (this->figurein[ptr0]->get_figure_coord()[0] == x && this->figurein[ptr0]->get_figure_coord()[1] == y) {
 										this->figurein[ptr0]->set_figure_coord(c, z);
 										set_pice(c, z, this->figurein[ptr0]->get_figure_type());
+										//IF ITS PAWN and its END OF A BOARD, pawn maybe who you need!
+										if ((this->figurein[ptr0]->get_figure_type() == 1 && c == 1) || (this->figurein[ptr0]->get_figure_type() == -1 && c == 8)) {
+											int tmptype;
+											cout << "Выберите любую фигуру: " << endl;
+											cin >> tmptype;
+											Figure tmpfig = Figure(this->figurein[ptr0]->get_figure_coord()[0], this->figurein[ptr0]->get_figure_coord()[1], this->figurein[ptr0]->get_figure_type(), this->figurein[ptr0]->get_figure_root());
+											this->figurein[ptr0]->set_figure(set_figure_root_by_type(tmpfig, tmptype));
+											this->figurein[ptr0]->set_figure_type(tmptype);
+										}
 									}
 								}
 								this->board[x + 1][y + 1] = 0;
@@ -359,11 +366,20 @@ public:
 							}
 						}
 						//and there is not(done)
-						else {
+						else{
 							for (int ptr0 = 0; ptr0 < size(this->figurein); ptr0++) {
 								if (this->figurein[ptr0]->get_figure_coord()[0] == x && this->figurein[ptr0]->get_figure_coord()[1] == y) {
 									this->figurein[ptr0]->set_figure_coord(c, z);
 									set_pice(c, z, this->figurein[ptr0]->get_figure_type());
+									//IF ITS PAWN and its END OF A BOARD, pawn maybe who you need!
+									if ((this->figurein[ptr0]->get_figure_type() == 1 && c == 1) || (this->figurein[ptr0]->get_figure_type() == -1 && c == 8)) {
+										int tmptype;
+										cout << "Выберите любую фигуру: " << endl;
+										cin >> tmptype;
+										Figure tmpfig = Figure(this->figurein[ptr0]->get_figure_coord()[0], this->figurein[ptr0]->get_figure_coord()[1],this->figurein[ptr0]->get_figure_type(), this->figurein[ptr0]->get_figure_root());
+										this->figurein[ptr0]->set_figure(set_figure_root_by_type(tmpfig, tmptype));
+										this->figurein[ptr0]->set_figure_type(tmptype);
+									}
 								}
 							}
 							this->board[x + 1][y + 1] = 0;
@@ -394,8 +410,29 @@ public:
 		for (int ptr0 = 0; ptr0 < size(this->figurein); ptr0++) {
 			if (this->figurein[ptr0]->get_figure_alive() == false) {
 				this->figurein[ptr0]->set_figure_coord(0, 0);
-				this->figurein[ptr0]->set_figure_root('+');
+				this->figurein[ptr0]->set_figure_root("+");
 				//this->figurein[ptr0]->~Figure();
+			}
+		}
+	}
+
+	//when pawn across the board 1 and 8 - its func change the type and root of pawn! 
+	//REBUILD THAT FINC WITH !!!!!!!!!!!!!!!!FIND!!!!!!!!!!!
+	Figure set_figure_root_by_type(Figure A, int B) {
+		if (A.get_figure_type() > 0 && B > 0) {
+			for (int ptr0 = 16; ptr0 < size(this->figurein); ptr0++) {
+				if (this->figurein[ptr0]->get_figure_type() == B) {
+					A.set_figure_root(this->figurein[ptr0]->get_figure_root());
+					return A;
+				}
+			}
+		}
+		if (A.get_figure_type() < 0 && B < 0) {
+			for (int ptr0 = 0; ptr0 < 16; ptr0++) {
+				if (this->figurein[ptr0]->get_figure_type() == B) {
+					A.set_figure_root(this->figurein[ptr0]->get_figure_root());
+					return A;
+				}
 			}
 		}
 	}
@@ -510,6 +547,13 @@ public:
 		set_pice_newgame();
 		statistics.clear();
 		M = 0;
+	}
+
+	//test func to get all figure from set_new_game_func
+	void get_figure_from_board() {
+		for (int ptr0 = 0; ptr0 < size(this->figurein); ptr0++) {
+			cout << this->figurein[ptr0]->get_figure_root() << ':' << this->figurein[ptr0]->get_figure_type() << ' ';
+		}
 	}
 };
 

@@ -20,6 +20,14 @@ public:
 	}
 	Figure(int a, int b, int c, string d):coordx(a), coordy(b), type(c),root(d),alive(1) {
 	}
+	void set_figure(Figure A) {
+		this->coordx = A.coordx;
+		this->coordy = A.coordy;
+		this->type = A.type;
+		this->root.clear();
+		this->root = A.root;
+		this->alive = A.alive;
+	}
 	~Figure() {}
 
 	vector<int> get_figure() {
@@ -39,7 +47,7 @@ public:
 	void set_figure_live(bool a) {
 		this->alive = a;
 	}
-	void set_figure_root(char a) {
+	void set_figure_root(string a) {
 		this->root.clear();
 		this->root = a;
 	}

@@ -34,14 +34,14 @@ void start_new_game() {
 	cor.X = 50;
 	cor.Y = 0;
 	SetConsoleCursorPosition(hConsole, cor);
-	SetConsoleTextAttribute(hConsole, BACKGROUND_RED | 15);
-	cout << "**CHESS**" << setw(100) << "...by Dies_Irae" << endl;
 	//language
 	SetConsoleOutputCP(1251);
 	SetConsoleCP(1251);
 	//new game set board and figure
+	system("CLS");
 	test->set_pice_newgame();
 	test->get_board();
+	
 	//main game loop
 	for (int moove = 0; moove < 100000; moove++) {
 		int a, c;
@@ -149,7 +149,7 @@ void MainMenu() {
 		if (coice == 1) {
 			start_new_game();
 		}
-		if (coice == 3) {
+		if (coice == 4) {
 			break;
 		}
 	}

@@ -1,12 +1,13 @@
-#pragma once
+п»ї#pragma once
 #include <iostream>
 #include "chessboard.h"
 #include "Figure.h"
 #include <windows.h>
 #include <iomanip>
+#include <wchar.h>
 using namespace std;
 
-//ОБЪЯВЛЕНИЕ ВНЕШНИХ ПЕРЕМЕННЫХ
+//РћР‘РЄРЇР’Р›Р•РќРР• Р’РќР•РЁРќРРҐ РџР•Р Р•РњР•РќРќР«РҐ
 //string for work with statistics
 vector <string> statistics;
 //calc moove
@@ -34,9 +35,6 @@ void start_new_game() {
 	cor.X = 50;
 	cor.Y = 0;
 	SetConsoleCursorPosition(hConsole, cor);
-	//language
-	SetConsoleOutputCP(1251);
-	SetConsoleCP(1251);
 	//new game set board and figure
 	system("CLS");
 	test->set_pice_newgame();
@@ -46,12 +44,12 @@ void start_new_game() {
 	for (int moove = 0; moove < 100000; moove++) {
 		int a, c;
 		char b, d;
-		cout << "Ход: " << moove + 1 << endl;
+		cout << "Turn pointer: " << moove + 1 << endl;
 		if (moove % 2 == 0) {
-			cout << "Ход белых" << endl;
-			cout << "Введите координаты фигуры и координаты хода: " << endl;
+			cout << "Now white turn" << endl;
+			cout << "Enter coord. of figure and coord. to move: " << endl;
 			cin >> b >> a >> d >> c;
-			statistics.push_back("Ход: " + to_string(moove + 1) + " | " + b + to_string(a) + '-' + d + to_string(c));
+			statistics.push_back("Turn: " + to_string(moove + 1) + " | " + b + to_string(a) + '-' + d + to_string(c));
 			a = 9 - a;
 			c = 9 - c;
 			test->moove_pice(a, b - 96, c, d - 96);
@@ -64,10 +62,10 @@ void start_new_game() {
 			test->get_board();
 		}
 		else if (moove % 2 != 0) {
-			cout << "Ход черных" << endl;
-			cout << "Введите координаты фигуры и координаты хода: " << endl;
+			cout << "Now black turn" << endl;
+			cout << "Enter coord. of figure and coord. to move: " << endl;
 			cin >> b >> a >> d >> c;
-			statistics.push_back("Ход: " + to_string(moove + 1) + " | " + b + to_string(a) + '-' + d + to_string(c));
+			statistics.push_back("Turn: " + to_string(moove + 1) + " | " + b + to_string(a) + '-' + d + to_string(c));
 			a = 9 - a;
 			c = 9 - c;
 			test->moove_pice(a, b - 96, c, d - 96);
@@ -113,27 +111,32 @@ void MainMenu() {
 	while (coice != 0){
 		hidecursor();
 		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+		/*
+		const wchar_t* white = L"в™”в™•в™–в™—в™в™™\r\n";
+		const wchar_t* black = L"в™љв™›в™њв™ќв™ћв™џ\r\n";
+		*/
 		cout << endl << "**********************************************************************************************************************************************" << endl;
-		cout << endl << "****                                                  ";
+		cout << endl << "***________________________________________________________________________________________________________________________________________***" << endl;
+		cout << endl << "***|                                                  ";
 		SetConsoleTextAttribute(hConsole, BACKGROUND_RED| BACKGROUND_BLUE | BACKGROUND_GREEN | 4);
 		cout << "Simple CHESS";
 		SetConsoleTextAttribute(hConsole, 7);
-		cout << "                                                                        ****" << endl;
-		cout << endl << "****                                                   ";
+		cout << "                                                                        |***" << endl;
+		cout << endl << "***|                                                   ";
 		SetConsoleTextAttribute(hConsole, BACKGROUND_RED | BACKGROUND_BLUE | BACKGROUND_GREEN | 4);
 		cout << "Main Menu";
 		SetConsoleTextAttribute(hConsole, 7);
-		cout << "                                                                          ****" << endl;
-		cout << endl << "**********************************************************************************************************************************************" << endl;
-		cout << endl << "****" << "|   I----->" << "  New Game|";
-		cout << "                                                                                                                ****" << endl;
-		cout << endl << "****" << "|  II----->" << "   Credits|";
-		cout << "                                                                                                                ****" << endl;
-		cout << endl << "****" << "| III----->" << "   Options|";
-		cout << "                                                                                                                ****" << endl;
-		cout << endl << "****" << "|  IV----->" << "      Exit|";
-		cout << "                                                                                                                ****" << endl;
-		cout << endl << "**********************************************************************************************************************************************" << endl;
+		cout << "                                                                          |***" << endl;
+		cout << endl << "***|______________________________________________________________________________________________________________________________________|***" << endl;
+		cout << endl << "***|" << "   I----->" << "  New Game|";
+		cout << "                                                                                                                 |***" << endl;
+		cout << endl << "***|" << "  II----->" << "   Credits|";
+		cout << "                                                                                                                 |***" << endl;
+		cout << endl << "***|" << " III----->" << "   Options|";
+		cout << "                                                                                                                 |***" << endl;
+		cout << endl << "***|" << "  IV----->" << "      Exit|";
+		cout << "                                                                                                                 |***" << endl;
+		cout << endl << "***|______________________________________________________________________________________________________________________________________|***" << endl;
 		cout << endl << "**********************************************************************************************************************************************" << endl;
 		cout << endl;
 		cout << endl;

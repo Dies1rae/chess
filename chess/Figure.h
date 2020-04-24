@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <wchar.h>
 using namespace std;
 class Figure{
 private:
@@ -16,7 +17,7 @@ public:
 		this->coordy = 0;
 		this->type = 0;
 		this->alive = 0;
-		this->root = "";
+		this->root;
 	}
 	Figure(int a, int b, int c, string d):coordx(a), coordy(b), type(c),root(d),alive(1) {
 	}

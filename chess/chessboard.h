@@ -1,10 +1,12 @@
-#pragma once
+ï»¿#pragma once
 #include <iostream>
 #include <iomanip>
 #include <vector>
 #include "Figure.h"
 #include <vector>
 #include <Windows.h>
+#include <wchar.h>
+#define _GLIBCXX_USE_WCHAR_T
 using namespace std;
 
 //ALL EXTERN DATA
@@ -160,7 +162,7 @@ public:
 							}
 						}
 						if (this->board[ptr1][ptr2] == 0) {
-							cout << setw(4) << this->board[ptr1][ptr2] << setw(4);
+							cout << setw(4) << " " << setw(4);
 						}
 					}
 					else if (ptr1 % 2 == 0 && ptr2 % 2 != 0) {
@@ -173,7 +175,7 @@ public:
 							}
 						}
 						if (this->board[ptr1][ptr2] == 0) {
-							cout << setw(4) << this->board[ptr1][ptr2] << setw(4);
+							cout << setw(4) << " " << setw(4);
 						}
 					}
 					if (ptr1 % 2 != 0 && ptr2 % 2 == 0) {
@@ -186,7 +188,7 @@ public:
 							}
 						}
 						if (this->board[ptr1][ptr2] == 0) {
-							cout << setw(4) << this->board[ptr1][ptr2] << setw(4);
+							cout << setw(4) << " " << setw(4);
 						}
 					}
 					else if (ptr1 % 2 != 0 && ptr2 % 2 != 0) {
@@ -199,7 +201,7 @@ public:
 							}
 						}
 						if (this->board[ptr1][ptr2] == 0) {
-							cout << setw(4) << this->board[ptr1][ptr2] << setw(4);
+							cout << setw(4) << " " << setw(4);
 						}
 					}
 				}
@@ -291,7 +293,7 @@ public:
 	}
 	//set figure function for complete movement 
 	void set_pice(int x, int y, int fig) {
-		//ïî îòíîøåíèþ ê ìàññèâó áîàðä âñå êîîðäèíàòû èäóò ñ óâåëè÷åíèåì íà 1
+		//Ð¿Ð¾ Ð¾Ñ‚Ð½Ð¾ÑˆÐµÐ½Ð¸ÑŽ Ðº Ð¼Ð°ÑÑÐ¸Ð²Ñƒ Ð±Ð¾Ð°Ñ€Ð´ Ð²ÑÐµ ÐºÐ¾Ð¾Ñ€Ð´Ð¸Ð½Ð°Ñ‚Ñ‹ Ð¸Ð´ÑƒÑ‚ Ñ ÑƒÐ²ÐµÐ»Ð¸Ñ‡ÐµÐ½Ð¸ÐµÐ¼ Ð½Ð° 1
 		if (this->board[x + 1][y + 1] == 9) {
 			cerr << "Wrong coordinates of the board" << endl;
 		}
@@ -306,7 +308,7 @@ public:
 	//moove figure by coordinates (from x(2) and from y(E) --> to c(4) to z(E))
 	void moove_pice(int x, int y, int c, int z) {
 		//if its side of board
-		//ïî îòíîøåíèþ ê ìàññèâó áîàðä âñå êîîðäèíàòû èäóò ñ óâåëè÷åíèåì íà 1, ïî îòíîøåíèþ æå ê ìàññèâó figurein ýòî ïðîñòî êîîðäèíàòû
+		//Ð¿Ð¾ Ð¾Ñ‚Ð½Ð¾ÑˆÐµÐ½Ð¸ÑŽ Ðº Ð¼Ð°ÑÑÐ¸Ð²Ñƒ Ð±Ð¾Ð°Ñ€Ð´ Ð²ÑÐµ ÐºÐ¾Ð¾Ñ€Ð´Ð¸Ð½Ð°Ñ‚Ñ‹ Ð¸Ð´ÑƒÑ‚ Ñ ÑƒÐ²ÐµÐ»Ð¸Ñ‡ÐµÐ½Ð¸ÐµÐ¼ Ð½Ð° 1, Ð¿Ð¾ Ð¾Ñ‚Ð½Ð¾ÑˆÐµÐ½Ð¸ÑŽ Ð¶Ðµ Ðº Ð¼Ð°ÑÑÐ¸Ð²Ñƒ figurein ÑÑ‚Ð¾ Ð¿Ñ€Ð¾ÑÑ‚Ð¾ ÐºÐ¾Ð¾Ñ€Ð´Ð¸Ð½Ð°Ñ‚Ñ‹
 		if (this->board[x + 1][y + 1] == 9 || this->board[c + 1][z + 1] == 9) {
 			propusk = 1;
 			cerr << "Wrong coordinates of the board" << endl;
@@ -349,7 +351,7 @@ public:
 										//IF ITS PAWN and its END OF A BOARD, pawn maybe who you need!
 										if ((this->figurein[ptr0]->get_figure_type() == 1 && c == 1) || (this->figurein[ptr0]->get_figure_type() == -1 && c == 8)) {
 											int tmptype;
-											cout << "Âûáåðèòå ëþáóþ ôèãóðó: " << endl;
+											cout << "Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ Ð»ÑŽÐ±ÑƒÑŽ Ñ„Ð¸Ð³ÑƒÑ€Ñƒ: " << endl;
 											cin >> tmptype;
 											Figure tmpfig = Figure(this->figurein[ptr0]->get_figure_coord()[0], this->figurein[ptr0]->get_figure_coord()[1], this->figurein[ptr0]->get_figure_type(), this->figurein[ptr0]->get_figure_root());
 											this->figurein[ptr0]->set_figure(set_figure_root_by_type(tmpfig, tmptype));
@@ -374,7 +376,7 @@ public:
 									//IF ITS PAWN and its END OF A BOARD, pawn maybe who you need!
 									if ((this->figurein[ptr0]->get_figure_type() == 1 && c == 1) || (this->figurein[ptr0]->get_figure_type() == -1 && c == 8)) {
 										int tmptype;
-										cout << "Âûáåðèòå ëþáóþ ôèãóðó: " << endl;
+										cout << "Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ Ð»ÑŽÐ±ÑƒÑŽ Ñ„Ð¸Ð³ÑƒÑ€Ñƒ: " << endl;
 										cin >> tmptype;
 										Figure tmpfig = Figure(this->figurein[ptr0]->get_figure_coord()[0], this->figurein[ptr0]->get_figure_coord()[1],this->figurein[ptr0]->get_figure_type(), this->figurein[ptr0]->get_figure_root());
 										this->figurein[ptr0]->set_figure(set_figure_root_by_type(tmpfig, tmptype));

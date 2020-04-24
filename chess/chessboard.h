@@ -153,24 +153,37 @@ public:
 				//chess figure
 				else {
 					if (ptr1 % 2 == 0 && ptr2 % 2 == 0) {
-						SetConsoleTextAttribute(hConsole, BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED);
 						for (int ptr0 = 0; ptr0 < size(this->figurein); ptr0++) {
 							if (ptr1 - 1 == this->figurein[ptr0]->get_figure_coord()[0] && ptr2 - 1 == this->figurein[ptr0]->get_figure_coord()[1]) {
-								if (this->figurein[ptr0]->get_figure_alive() == 1) {
+								if (this->figurein[ptr0]->get_figure_type() > 0) {
+									SetConsoleTextAttribute(hConsole, 8);
+									SetConsoleTextAttribute(hConsole, BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED);
+									cout << setw(4) << this->figurein[ptr0]->get_figure_root() << setw(4);
+								}
+								if (this->figurein[ptr0]->get_figure_type() < 0) {
+									SetConsoleTextAttribute(hConsole, 4);
+									SetConsoleTextAttribute(hConsole, BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED);
 									cout << setw(4) << this->figurein[ptr0]->get_figure_root() << setw(4);
 								}
 							}
 						}
 						if (this->board[ptr1][ptr2] == 0) {
+							SetConsoleTextAttribute(hConsole, BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED);
 							cout << setw(4) << " " << setw(4);
 						}
 					}
 					else if (ptr1 % 2 == 0 && ptr2 % 2 != 0) {
-						SetConsoleTextAttribute(hConsole, 4);
 						for (int ptr0 = 0; ptr0 < size(this->figurein); ptr0++) {
 							if (ptr1 - 1 == this->figurein[ptr0]->get_figure_coord()[0] && ptr2 - 1 == this->figurein[ptr0]->get_figure_coord()[1]) {
 								if (this->figurein[ptr0]->get_figure_alive() == 1) {
-									cout << setw(4) << this->figurein[ptr0]->get_figure_root() << setw(4);
+									if (this->figurein[ptr0]->get_figure_type() > 0) {
+										SetConsoleTextAttribute(hConsole, 8);
+										cout << setw(4) << this->figurein[ptr0]->get_figure_root() << setw(4);
+									}
+									if (this->figurein[ptr0]->get_figure_type() < 0) {
+										SetConsoleTextAttribute(hConsole, 4);
+										cout << setw(4) << this->figurein[ptr0]->get_figure_root() << setw(4);
+									}
 								}
 							}
 						}
@@ -179,10 +192,14 @@ public:
 						}
 					}
 					if (ptr1 % 2 != 0 && ptr2 % 2 == 0) {
-						SetConsoleTextAttribute(hConsole, 4);
 						for (int ptr0 = 0; ptr0 < size(this->figurein); ptr0++) {
 							if (ptr1 - 1 == this->figurein[ptr0]->get_figure_coord()[0] && ptr2 - 1 == this->figurein[ptr0]->get_figure_coord()[1]) {
-								if (this->figurein[ptr0]->get_figure_alive() == 1) {
+								if (this->figurein[ptr0]->get_figure_type() > 0) {
+									SetConsoleTextAttribute(hConsole, 8);
+									cout << setw(4) << this->figurein[ptr0]->get_figure_root() << setw(4);
+								}
+								if (this->figurein[ptr0]->get_figure_type() < 0) {
+									SetConsoleTextAttribute(hConsole, 4);
 									cout << setw(4) << this->figurein[ptr0]->get_figure_root() << setw(4);
 								}
 							}
@@ -192,15 +209,22 @@ public:
 						}
 					}
 					else if (ptr1 % 2 != 0 && ptr2 % 2 != 0) {
-						SetConsoleTextAttribute(hConsole, BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED );
 						for (int ptr0 = 0; ptr0 < size(this->figurein); ptr0++) {
 							if (ptr1 - 1 == this->figurein[ptr0]->get_figure_coord()[0] && ptr2 - 1 == this->figurein[ptr0]->get_figure_coord()[1]) {
-								if (this->figurein[ptr0]->get_figure_alive() == 1) {
+								if (this->figurein[ptr0]->get_figure_type() > 0) {
+									SetConsoleTextAttribute(hConsole, 8);
+									SetConsoleTextAttribute(hConsole, BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED);
+									cout << setw(4) << this->figurein[ptr0]->get_figure_root() << setw(4);
+								}
+								if (this->figurein[ptr0]->get_figure_type() < 0) {
+									SetConsoleTextAttribute(hConsole, 4);
+									SetConsoleTextAttribute(hConsole, BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED);
 									cout << setw(4) << this->figurein[ptr0]->get_figure_root() << setw(4);
 								}
 							}
 						}
 						if (this->board[ptr1][ptr2] == 0) {
+							SetConsoleTextAttribute(hConsole, BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED);
 							cout << setw(4) << " " << setw(4);
 						}
 					}

@@ -49,36 +49,42 @@ void start_new_game() {
 			cout << "Now white turn" << endl;
 			cout << "Enter coord. of figure and coord. to move: " << endl;
 			cin >> b >> a >> d >> c;
-			statistics.push_back("Turn: " + to_string(moove + 1) + " | " + b + to_string(a) + '-' + d + to_string(c));
+			statistics.push_back("Turn: " + to_string(moove) + " | " + b + to_string(a) + '-' + d + to_string(c));
 			a = 9 - a;
 			c = 9 - c;
 			test->moove_pice(a, b - 96, c, d - 96);
 			if (propusk == true) {
 				M++;
-				statistics.pop_back();
+				statistics.push_back("Wrong turn: " + to_string(moove) + " | " + b + to_string(a) + '-' + d + to_string(c));
 				moove++;
 				propusk = false;
 			}
 			test->get_board();
+			//stat
+			M++;
 		}
 		else if (moove % 2 != 0) {
 			cout << "Now black turn" << endl;
 			cout << "Enter coord. of figure and coord. to move: " << endl;
 			cin >> b >> a >> d >> c;
-			statistics.push_back("Turn: " + to_string(moove + 1) + " | " + b + to_string(a) + '-' + d + to_string(c));
+			statistics.push_back("Turn: " + to_string(moove) + " | " + b + to_string(a) + '-' + d + to_string(c));
 			a = 9 - a;
 			c = 9 - c;
 			test->moove_pice(a, b - 96, c, d - 96);
 			if (propusk == true) {
 				M++;
-				statistics.pop_back();
+				statistics.push_back("Wrong turn: " + to_string(moove) + " | " + b + to_string(a) + '-' + d + to_string(c));
 				moove++;
 				propusk = false;
 			}
 			test->get_board();
+			//stat
+			M++;
 		}
-		M++;
+
+
 		//king dies action
+		//WIN ENDS
 		if (test->get_king_alive()[0] == false) {
 			system("CLS");
 			cout << "------------------------GAME OVER---------------------" << endl;
@@ -95,6 +101,32 @@ void start_new_game() {
 			cout << "------------------------GAME OVER---------------------" << endl;
 			cout << "------------------------BLACK WINS---------------------" << endl;
 			cout << "*-------------------------CHESS" << setw(100) << "...by Dies_Irae" << endl;
+			system("PAUSE");
+			test->end_game();
+			test = new chessboard();
+			moove = M;
+			break;
+		}
+		//PATS END
+		//END OF TURNS
+		if (test->get_king_alive()[1] && test->get_king_alive()[0] && moove == 100000-2) {
+			system("CLS");
+			cout << "------------------------GAME OVER---------------------" << endl;
+			cout << "---------------------------PAT------------------------" << endl;
+			cout << "*-------------------------CHESS" << setw(100) << "...by Dies_Irae" << endl;
+			system("PAUSE");
+			test->end_game();
+			test = new chessboard();
+			moove = M;
+			break;
+		}
+		//ALL DEAD EXCEPT THE KINGS
+		if (test->get_king_alive()[1] && test->get_king_alive()[0] && test->pat_kings() == true) {
+			system("CLS");
+			cout << "------------------------GAME OVER---------------------" << endl;
+			cout << "---------------------------PAT------------------------" << endl;
+			cout << "*-------------------------CHESS" << setw(100) << "...by Dies_Irae" << endl;
+			system("PAUSE");
 			test->end_game();
 			test = new chessboard();
 			moove = M;

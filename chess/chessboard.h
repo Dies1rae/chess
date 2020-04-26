@@ -52,8 +52,6 @@ public:
 		SetConsoleCursorPosition(hConsole, cor);
 		//if figure dead set coor and root
 		if_figure_dead();
-		//clear stat
-		stat_clear(M);
 		//printing statistics, board and figure to cout
 		for (int ptr1 = 0; ptr1 < size(this->board); ptr1++) {
 			for (int ptr2 = 0; ptr2 < size(this->board); ptr2++) {
@@ -235,7 +233,7 @@ public:
 	}
 	//to clear vector <string> statistics
 	void stat_clear(int a) {
-		if (a == 8) {
+		if (a >=14) {
 			statistics.clear();
 			M = 0;
 		}
@@ -335,13 +333,13 @@ public:
 		//по отношению к массиву боард все координаты идут с увеличением на 1, по отношению же к массиву figurein это просто координаты
 		if (this->board[x + 1][y + 1] == 9 || this->board[c + 1][z + 1] == 9) {
 			propusk = 1;
-			cerr << "Wrong coordinates of the board" << endl;
+			cout << "Wrong coordinates of the board" << endl;
 			system("pause");
 		}
 		//bug with mooves if no figure on cell 
 		else if (this->board[x+1][y+1] == 0) {
 			propusk = 1;
-			cerr << "Wrong turn, there no figure on this cell" << endl;
+			cout << "Wrong turn, there no figure on this cell" << endl;
 			system("pause");
 		}
 		else {
@@ -350,7 +348,7 @@ public:
 				if (this->figurein[ptr0]->get_figure_coord()[0] == x && this->figurein[ptr0]->get_figure_coord()[1] == y) {
 					if ((attack_and_movement(x, y, c, z, this->figurein[ptr0]->get_figure_type())[0] == 0) || (M % 2 == 0 && this->figurein[ptr0]->get_figure_type() < 0) || (M % 2 != 0 && this->figurein[ptr0]->get_figure_type() > 0) ) {
 						propusk = 1;
-						cerr << "Wrong turn" << endl;
+						cout << "Wrong turn" << endl;
 						system("pause");
 					}
 					else {
@@ -361,7 +359,7 @@ public:
 								for (int ptr0 = 0; ptr0 < size(this->figurein); ptr0++) {
 									if (this->figurein[ptr0]->get_figure_coord()[0] == c && this->figurein[ptr0]->get_figure_coord()[1] == z) {
 										if (this->figurein[ptr0]->get_figure_alive() == true) {
-											this->figurein[ptr0]->set_figure_live(false);
+											this->figurein[ptr0]->set_figure_alive(false);
 											this->figurein[ptr0]->set_figure_coord(0, 0);
 											this->board[c + 1][z + 1] = 0;
 										}
@@ -375,7 +373,7 @@ public:
 										//IF ITS PAWN and its END OF A BOARD, pawn maybe who you need!
 										if ((this->figurein[ptr0]->get_figure_type() == 1 && c == 1) || (this->figurein[ptr0]->get_figure_type() == -1 && c == 8)) {
 											int tmptype;
-											cout << "Выберите любую фигуру: " << endl;
+											cout << "Choose any figure to replace pawn: " << endl;
 											cin >> tmptype;
 											Figure tmpfig = Figure(this->figurein[ptr0]->get_figure_coord()[0], this->figurein[ptr0]->get_figure_coord()[1], this->figurein[ptr0]->get_figure_type(), this->figurein[ptr0]->get_figure_root());
 											this->figurein[ptr0]->set_figure(set_figure_root_by_type(tmpfig, tmptype));
@@ -400,7 +398,7 @@ public:
 									//IF ITS PAWN and its END OF A BOARD, pawn maybe who you need!
 									if ((this->figurein[ptr0]->get_figure_type() == 1 && c == 1) || (this->figurein[ptr0]->get_figure_type() == -1 && c == 8)) {
 										int tmptype;
-										cout << "Выберите любую фигуру: " << endl;
+										cout << "Choose any figure to replace pawn: " << endl;
 										cin >> tmptype;
 										Figure tmpfig = Figure(this->figurein[ptr0]->get_figure_coord()[0], this->figurein[ptr0]->get_figure_coord()[1],this->figurein[ptr0]->get_figure_type(), this->figurein[ptr0]->get_figure_root());
 										this->figurein[ptr0]->set_figure(set_figure_root_by_type(tmpfig, tmptype));
@@ -413,6 +411,9 @@ public:
 					}
 					//control king alive status
 					get_king_alive();
+					pat_kings();
+					//clear stat
+					stat_clear(M);
 					}
 				}
 			}
@@ -436,8 +437,6 @@ public:
 		for (int ptr0 = 0; ptr0 < size(this->figurein); ptr0++) {
 			if (this->figurein[ptr0]->get_figure_alive() == false) {
 				this->figurein[ptr0]->set_figure_coord(0, 0);
-				this->figurein[ptr0]->set_figure_root("+");
-				//this->figurein[ptr0]->~Figure();
 			}
 		}
 	}
@@ -580,6 +579,19 @@ public:
 		for (int ptr0 = 0; ptr0 < size(this->figurein); ptr0++) {
 			cout << this->figurein[ptr0]->get_figure_root() << ':' << this->figurein[ptr0]->get_figure_type() << ' ';
 		}
+	}
+	
+	//pat config 1 - two kings and no one else
+	bool pat_kings() {
+		int tmpptr = 0;
+		for (auto ptr0 : this->figurein) {
+			if ((ptr0->get_figure_type() != 6 || ptr0->get_figure_type() != -6) && ptr0->get_figure_alive() == 0) {
+				//if someone alive - true
+				tmpptr++;
+			}
+		}
+		//if not false
+		return tmpptr >= 30 ? true : false;
 	}
 };
 

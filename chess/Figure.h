@@ -45,7 +45,7 @@ public:
 		this->coordx = x;
 		this->coordy = y;
 	}
-	void set_figure_live(bool a) {
+	void set_figure_alive(bool a) {
 		this->alive = a;
 	}
 	void set_figure_root(string a) {

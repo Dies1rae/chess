@@ -49,7 +49,7 @@ void start_new_game() {
 			cout << "Now white turn" << endl;
 			cout << "Enter coord. of figure and coord. to move: " << endl;
 			cin >> b >> a >> d >> c;
-			statistics.push_back("Turn: " + to_string(moove) + " | " + b + to_string(a) + '-' + d + to_string(c));
+			statistics.push_back("White turn: " + to_string(moove) + " | " + b + to_string(a) + '-' + d + to_string(c));
 			a = 9 - a;
 			c = 9 - c;
 			test->moove_pice(a, b - 96, c, d - 96);
@@ -68,8 +68,7 @@ void start_new_game() {
 			cout << "Now black turn" << endl;
 			cout << "Enter coord. of figure and coord. to move: " << endl;
 			cin >> b >> a >> d >> c;
-			statistics.push_back("Turn: " + to_string(moove) + " | " + b + to_string(a) + '-' + d + to_string(c));
-			statistics.push_back("---------------");
+			statistics.push_back("Black turn: " + to_string(moove) + " | " + b + to_string(a) + '-' + d + to_string(c));
 			a = 9 - a;
 			c = 9 - c;
 			test->moove_pice(a, b - 96, c, d - 96);
@@ -77,7 +76,6 @@ void start_new_game() {
 				M++;
 				statistics.pop_back();
 				statistics.push_back("Wrong turn: " + to_string(moove) + " | " + b + to_string(a) + '-' + d + to_string(c));
-				statistics.push_back("---------------");
 				moove++;
 				propusk = false;
 			}

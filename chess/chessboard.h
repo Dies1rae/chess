@@ -62,7 +62,7 @@ public:
 					//left board and statistics
 					if (ptr2 == 11) {
 						if (ptr1 == 0) {
-							cout << setw(4) << '*' << setw(4) << setw(8) << '|' << setw(20) << "---White mooves---" << setw(5) << '|' << "---Black mooves---";
+							cout << setw(4) << '*' << setw(4) << setw(8) << '|' << setw(20) << "------------------Turns------------------" << setw(5) << '|';
 						}
 						else if (ptr1 == 1) {
 							if (statistics.size() >= 2) {
@@ -231,7 +231,7 @@ public:
 			cout << endl;
 		}
 	}
-	//to clear vector <string> statistics  ---- FIX STATISTICS
+	//to clear vector <string> statistics
 	void stat_clear(int a) {
 		if (a >=14) {
 			statistics.clear();

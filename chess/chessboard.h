@@ -231,7 +231,7 @@ public:
 			cout << endl;
 		}
 	}
-	//to clear vector <string> statistics
+	//to clear vector <string> statistics  ---- FIX STATISTICS
 	void stat_clear(int a) {
 		if (a >=14) {
 			statistics.clear();

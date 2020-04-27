@@ -4,6 +4,7 @@
 #include <windows.h>
 #include <iomanip>
 #include "Header.h"
+#include "Timer.h"
 using namespace std;
 
 

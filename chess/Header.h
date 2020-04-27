@@ -5,6 +5,7 @@
 #include <windows.h>
 #include <iomanip>
 #include <wchar.h>
+#include "Timer.h"
 using namespace std;
 
 //ОБЪЯВЛЕНИЕ ВНЕШНИХ ПЕРЕМЕННЫХ
@@ -16,6 +17,7 @@ int M = 0;
 bool propusk = 0;
 //create board and figure
 chessboard* test = new chessboard();
+int gametime = 0;
 
 void hidecursor(){
 	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -44,14 +46,22 @@ void start_new_game() {
 	for (int moove = 0; moove < 100000; moove++) {
 		int a, c;
 		char b, d;
-		cout << "Turn pointer: " << moove + 1 << endl;
+		cout << "Turn: " << moove + 1 << endl;
+		cout << "Game time : " << gametime << "/sec" << endl;
 		if (moove % 2 == 0) {
+			//timer---
+			Timer* white_t = new Timer();
+			white_t->Start();
+			//-----
 			cout << "Now white turn" << endl;
 			cout << "Enter coord. of figure and coord. to move: " << endl;
 			cin >> b >> a >> d >> c;
+			//stat
 			statistics.push_back("White turn: " + to_string(moove) + " | " + b + to_string(a) + '-' + d + to_string(c));
+			//-----
 			a = 9 - a;
 			c = 9 - c;
+			gametime += white_t->GetDuration();
 			test->moove_pice(a, b - 96, c, d - 96);
 			if (propusk == true) {
 				M++;
@@ -61,16 +71,23 @@ void start_new_game() {
 				propusk = false;
 			}
 			test->get_board();
+			cout << "Turn time: " << white_t->GetDuration() << "/sec" << endl;;
 			//stat
 			M++;
 		}
 		else if (moove % 2 != 0) {
+			Timer* Black_t = new Timer();
+			Black_t->Start();
 			cout << "Now black turn" << endl;
 			cout << "Enter coord. of figure and coord. to move: " << endl;
 			cin >> b >> a >> d >> c;
 			statistics.push_back("Black turn: " + to_string(moove) + " | " + b + to_string(a) + '-' + d + to_string(c));
 			a = 9 - a;
 			c = 9 - c;
+			//timer---
+			gametime += Black_t->GetDuration();
+			//------
+			//move---
 			test->moove_pice(a, b - 96, c, d - 96);
 			if (propusk == true) {
 				M++;
@@ -80,6 +97,7 @@ void start_new_game() {
 				propusk = false;
 			}
 			test->get_board();
+			cout << "Turn time: " << Black_t->GetDuration() << "/sec" << endl;
 			//stat
 			M++;
 		}

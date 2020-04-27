@@ -4,6 +4,7 @@
 #include <vector>
 #include <wchar.h>
 using namespace std;
+
 class Figure{
 private:
 	int coordx;
@@ -19,8 +20,9 @@ public:
 		this->alive = 0;
 		this->root;
 	}
-	Figure(int a, int b, int c, string d):coordx(a), coordy(b), type(c),root(d),alive(1) {
-	}
+	Figure(int a, int b, int c, string d):coordx(a), coordy(b), type(c),root(d),alive(1) {}
+
+
 	void set_figure(Figure A) {
 		this->coordx = A.coordx;
 		this->coordy = A.coordy;

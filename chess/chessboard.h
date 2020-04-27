@@ -62,7 +62,7 @@ public:
 					//left board and statistics
 					if (ptr2 == 11) {
 						if (ptr1 == 0) {
-							cout << setw(4) << '*' << setw(4) << setw(8) << '|' << setw(20) << "---------------------------Turns---------------------------" << '|';
+							cout << setw(4) << '*' << setw(4) << setw(8) << '|' << setw(20) << "-------------------------Turns-------------------------" << '|';
 						}
 						else if (ptr1 == 1) {
 							if (statistics.size() >= 2) {

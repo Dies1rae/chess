@@ -46,8 +46,10 @@ void start_new_game() {
 	for (int moove = 0; moove < 100000; moove++) {
 		int a, c;
 		char b, d;
+		SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_RED | 0);
 		cout << "Turn: " << moove + 1 << endl;
 		cout << "Game time : " << gametime << "/sec" << endl;
+		SetConsoleTextAttribute(hConsole, 7);
 		if (moove % 2 == 0) {
 			//timer---
 			Timer* white_t = new Timer();

@@ -168,7 +168,11 @@ void MainMenu() {
 	int bufferSize = WideCharToMultiByte(CP_UTF8, 0, bK, -1, NULL, 0, NULL, NULL);
 	char* BK = new char[bufferSize];
 	WideCharToMultiByte(CP_UTF8, 0, bK, -1, BK, bufferSize, NULL, NULL);
-	cout << BK << endl;
+	char test[sizeof(BK)];
+	strncpy_s(test, BK, sizeof(BK));
+	string SS;
+	SS.assign(test, sizeof(test) + 1);
+	cout << BK << endl << test << endl << SS << endl;
 	system("PAUSE");
 
 

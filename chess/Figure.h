@@ -3,6 +3,10 @@
 #include <string>
 #include <vector>
 #include <wchar.h>
+#include <iomanip>
+#include <windows.h>
+#include <cstdio>
+#include <sstream>
 using namespace std;
 
 class Figure{
@@ -66,3 +70,91 @@ public:
 
 };
 
+/*
+//convert figure wchar_t to char*
+char* get_ch_bK() {
+	wchar_t bK[] = L"\u265A";
+	int bufferSize = WideCharToMultiByte(CP_UTF8, 0, bK, -1, NULL, 0, NULL, NULL);
+	char* BK = new char[bufferSize];
+	WideCharToMultiByte(CP_UTF8, 0, bK, -1, BK, bufferSize, NULL, NULL);
+	return BK;
+}
+
+char get_ch_wK() {
+	wchar_t bK[] = L"\u2654";
+	int bufferSize = WideCharToMultiByte(CP_UTF8, 0, bK, -1, NULL, 0, NULL, NULL);
+	char* BK = new char[bufferSize];
+	WideCharToMultiByte(CP_UTF8, 0, bK, -1, BK, bufferSize, NULL, NULL);
+	return *BK;
+}
+char get_ch_bQ() {
+	wchar_t bK[] = L"\u265B";
+	int bufferSize = WideCharToMultiByte(CP_UTF8, 0, bK, -1, NULL, 0, NULL, NULL);
+	char* BK = new char[bufferSize];
+	WideCharToMultiByte(CP_UTF8, 0, bK, -1, BK, bufferSize, NULL, NULL);
+	return *BK;
+}
+char get_ch_wQ() {
+	wchar_t bK[] = L"\u2655";
+	int bufferSize = WideCharToMultiByte(CP_UTF8, 0, bK, -1, NULL, 0, NULL, NULL);
+	char* BK = new char[bufferSize];
+	WideCharToMultiByte(CP_UTF8, 0, bK, -1, BK, bufferSize, NULL, NULL);
+	return *BK;
+}
+char get_ch_bR() {
+	wchar_t bK[] = L"\u265C";
+	int bufferSize = WideCharToMultiByte(CP_UTF8, 0, bK, -1, NULL, 0, NULL, NULL);
+	char* BK = new char[bufferSize];
+	WideCharToMultiByte(CP_UTF8, 0, bK, -1, BK, bufferSize, NULL, NULL);
+	return *BK;
+}
+char get_ch_wR() {
+	wchar_t bK[] = L"\u2656";
+	int bufferSize = WideCharToMultiByte(CP_UTF8, 0, bK, -1, NULL, 0, NULL, NULL);
+	char* BK = new char[bufferSize];
+	WideCharToMultiByte(CP_UTF8, 0, bK, -1, BK, bufferSize, NULL, NULL);
+	return *BK;
+}
+char get_ch_bB() {
+	wchar_t bK[] = L"\u265D";
+	int bufferSize = WideCharToMultiByte(CP_UTF8, 0, bK, -1, NULL, 0, NULL, NULL);
+	char* BK = new char[bufferSize];
+	WideCharToMultiByte(CP_UTF8, 0, bK, -1, BK, bufferSize, NULL, NULL);
+	return *BK;
+}
+char get_ch_wB() {
+	wchar_t bK[] = L"\u2657";
+	int bufferSize = WideCharToMultiByte(CP_UTF8, 0, bK, -1, NULL, 0, NULL, NULL);
+	char* BK = new char[bufferSize];
+	WideCharToMultiByte(CP_UTF8, 0, bK, -1, BK, bufferSize, NULL, NULL);
+	return *BK;
+}
+char get_ch_bH() {
+	wchar_t bK[] = L"\u265E";
+	int bufferSize = WideCharToMultiByte(CP_UTF8, 0, bK, -1, NULL, 0, NULL, NULL);
+	char* BK = new char[bufferSize];
+	WideCharToMultiByte(CP_UTF8, 0, bK, -1, BK, bufferSize, NULL, NULL);
+	return *BK;
+}
+char get_ch_wH() {
+	wchar_t bK[] = L"\u2658";
+	int bufferSize = WideCharToMultiByte(CP_UTF8, 0, bK, -1, NULL, 0, NULL, NULL);
+	char* BK = new char[bufferSize];
+	WideCharToMultiByte(CP_UTF8, 0, bK, -1, BK, bufferSize, NULL, NULL);
+	return *BK;
+}
+char get_ch_bP() {
+	wchar_t bK[] = L"\u265F";
+	int bufferSize = WideCharToMultiByte(CP_UTF8, 0, bK, -1, NULL, 0, NULL, NULL);
+	char* BK = new char[bufferSize];
+	WideCharToMultiByte(CP_UTF8, 0, bK, -1, BK, bufferSize, NULL, NULL);
+	return *BK;
+}
+char get_ch_wP() {
+	wchar_t bK[] = L"\u2659";
+	int bufferSize = WideCharToMultiByte(CP_UTF8, 0, bK, -1, NULL, 0, NULL, NULL);
+	char* BK = new char[bufferSize];
+	WideCharToMultiByte(CP_UTF8, 0, bK, -1, BK, bufferSize, NULL, NULL);
+	return *BK;
+}
+*/

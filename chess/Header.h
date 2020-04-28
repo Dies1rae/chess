@@ -1,4 +1,5 @@
 ﻿#pragma once
+#pragma execution_character_set( "utf-8" )
 #include <iostream>
 #include "chessboard.h"
 #include "Figure.h"
@@ -6,6 +7,7 @@
 #include <iomanip>
 #include <wchar.h>
 #include "Timer.h"
+#include <cstdio>
 using namespace std;
 
 //ОБЪЯВЛЕНИЕ ВНЕШНИХ ПЕРЕМЕННЫХ
@@ -162,6 +164,15 @@ void start_new_game() {
 }
 
 void MainMenu() {
+	wchar_t bK[] = L"\u265A";
+	int bufferSize = WideCharToMultiByte(CP_UTF8, 0, bK, -1, NULL, 0, NULL, NULL);
+	char* BK = new char[bufferSize];
+	WideCharToMultiByte(CP_UTF8, 0, bK, -1, BK, bufferSize, NULL, NULL);
+	cout << BK << endl;
+	system("PAUSE");
+
+
+	SetConsoleOutputCP(CP_UTF8);
 	HWND consoleWindow = GetConsoleWindow();
 	SetWindowPos(consoleWindow, 0, 0, 0, 300, 300, SWP_NOSIZE | SWP_NOZORDER);
 	system("mode con cols=160 lines=30");
@@ -169,12 +180,8 @@ void MainMenu() {
 	while (coice != 0){
 		hidecursor();
 		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-		/*
-		const wchar_t* white = L"♔♕♖♗♘♙\r\n";
-		const wchar_t* black = L"♚♛♜♝♞♟\r\n";
-		*/
 		cout << endl << "**********************************************************************************************************************************************" << endl;
-		cout << endl << "***________________________________________________________________________________________________________________________________________***" << endl;
+		cout << endl << "***|______________________________________________________________________________________________________________________________________|***" << endl;
 		cout << endl << "***|                                                  ";
 		SetConsoleTextAttribute(hConsole, BACKGROUND_RED| BACKGROUND_BLUE | BACKGROUND_GREEN | 4);
 		cout << "Simple CHESS";

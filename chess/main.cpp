@@ -1,14 +1,11 @@
 #include <iostream>
-#include "chessboard.h"
-#include "Figure.h"
 #include <windows.h>
 #include <iomanip>
 #include "Header.h"
-#include "Timer.h"
-using namespace std;
 
 
 int main() {
+	SetConsoleOutputCP(CP_UTF8);
 	MainMenu();
 	return 0;
 }

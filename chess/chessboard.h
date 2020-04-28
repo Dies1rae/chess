@@ -247,6 +247,7 @@ public:
 				//rooks
 				if (ptr1 == 2 && (ptr2 == 2 || ptr2 == 9)) {
 					this->board[ptr1][ptr2] = -4;
+					//string RRR(get_ch_bR(), sizeof(get_ch_bR()+1));
 					this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, -4, "bR");
 					ptr0++;
 				}

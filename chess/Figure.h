@@ -21,7 +21,7 @@ public:
 		this->root;
 	}
 	Figure(int a, int b, int c, string d):coordx(a), coordy(b), type(c),root(d),alive(1) {}
-
+	~Figure() {}
 
 	void set_figure(Figure A) {
 		this->coordx = A.coordx;
@@ -31,7 +31,6 @@ public:
 		this->root = A.root;
 		this->alive = A.alive;
 	}
-	~Figure() {}
 
 	vector<int> get_figure() {
 		vector <int> tmp = {this->coordx, this->coordy, this->type, this->alive};

@@ -67,7 +67,9 @@ void start_new_game() {
 			test->moove_pice(a, b - 96, c, d - 96);
 			if (propusk == true) {
 				M++;
-				statistics.pop_back();
+				if (statistics.size() != 0) {
+					statistics.pop_back();
+				}
 				statistics.push_back("Wrong turn: " + to_string(moove) + " | " + b + to_string(a) + '-' + d + to_string(c));
 				moove++;
 				propusk = false;
@@ -93,7 +95,9 @@ void start_new_game() {
 			test->moove_pice(a, b - 96, c, d - 96);
 			if (propusk == true) {
 				M++;
-				statistics.pop_back();
+				if (statistics.size() != 0) {
+					statistics.pop_back();
+				}
 				statistics.push_back("Wrong turn: " + to_string(moove) + " | " + b + to_string(a) + '-' + d + to_string(c));
 				moove++;
 				propusk = false;

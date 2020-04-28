@@ -448,7 +448,7 @@ public:
 			for (int ptr0 = 16; ptr0 < size(this->figurein); ptr0++) {
 				if (this->figurein[ptr0]->get_figure_type() == B) {
 					A.set_figure_root(this->figurein[ptr0]->get_figure_root());
-					return A;
+					return  A;
 				}
 			}
 		}
@@ -456,7 +456,7 @@ public:
 			for (int ptr0 = 0; ptr0 < 16; ptr0++) {
 				if (this->figurein[ptr0]->get_figure_type() == B) {
 					A.set_figure_root(this->figurein[ptr0]->get_figure_root());
-					return A;
+					return  A;
 				}
 			}
 		}
@@ -469,17 +469,24 @@ public:
 		res.push_back(0);
 		//pawn ---WORKS FINE
 		if (t == 1 || t == -1) {
-			if (y == z && abs(c - x) == 2) {
-				res.push_back(c);
-				res.push_back(z);
+			//if in diagonals - figure we are can attack
+			if (get_fig_by_coord(c, z).get_figure_type() != 0) {
+				if ((y + 1 == z || y - 1 == z) && abs(c - x) == 1) {
+					res.push_back(c);
+					res.push_back(z);
+				}
 			}
-			if (y == z && abs(c - x) == 1) {
-				res.push_back(c);
-				res.push_back(z);
-			}
-			if ((y + 1 == z || y - 1 == z) && abs(c - x) == 1) {
-				res.push_back(c);
-				res.push_back(z);
+			else {
+				if ((t == 1 && x == 7) || (t == -1 && x == 2)) {
+					if (y == z && abs(c - x) == 2) {
+						res.push_back(c);
+						res.push_back(z);
+					}
+				}
+				if (y == z && abs(c - x) == 1) {
+					res.push_back(c);
+					res.push_back(z);
+				}
 			}
 		}
 		//horseman ---WORKS FINE
@@ -566,6 +573,17 @@ public:
 		}
 		return res;
 	}
+
+	Figure get_fig_by_coord(int x, int y) {
+		Figure tmp;
+		for (int fig = 0; fig < size(this->figurein);  fig++) {
+			if (figurein[fig]->get_figure_coord()[0] == x && figurein[fig]->get_figure_coord()[1] == y) {
+				tmp.set_figure(*figurein[fig]);
+			}
+		}
+		return tmp;
+	}
+
 	//END_GAME
 	void end_game() {
 		stat_clear(9);

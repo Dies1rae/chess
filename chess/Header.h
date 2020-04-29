@@ -1,13 +1,12 @@
 ﻿#pragma once
-#pragma execution_character_set( "utf-8" )
 #include <iostream>
 #include "chessboard.h"
 #include "Figure.h"
 #include <windows.h>
 #include <iomanip>
-#include <wchar.h>
 #include "Timer.h"
 #include <cstdio>
+#include "Menu.h"
 using namespace std;
 
 //ОБЪЯВЛЕНИЕ ВНЕШНИХ ПЕРЕМЕННЫХ
@@ -182,44 +181,11 @@ void MainMenu() {
 	SetWindowPos(consoleWindow, 0, 0, 0, 300, 300, SWP_NOSIZE | SWP_NOZORDER);
 	system("mode con cols=160 lines=30");
 	int coice = 9;
-	//test for game figure type
-	cout << "Choose chess figure type(1 - Simple string | 2 - Unicode figure(need gothic console font))" << endl;
-	cin >> FigureView;
 	//govno menu
 	while (coice != 0){
 		hidecursor();
-		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-		cout << endl << "**********************************************************************************************************************************************" << endl;
-		cout << endl << "***|______________________________________________________________________________________________________________________________________|***" << endl;
-		cout << endl << "***|                                                  ";
-		SetConsoleTextAttribute(hConsole, BACKGROUND_RED| BACKGROUND_BLUE | BACKGROUND_GREEN | 4);
-		cout << "Simple CHESS";
-		SetConsoleTextAttribute(hConsole, 7);
-		cout << "                                                                        |***" << endl;
-		cout << endl << "***|                                                   ";
-		SetConsoleTextAttribute(hConsole, BACKGROUND_RED | BACKGROUND_BLUE | BACKGROUND_GREEN | 4);
-		cout << "Main Menu";
-		SetConsoleTextAttribute(hConsole, 7);
-		cout << "                                                                          |***" << endl;
-		cout << endl << "***|______________________________________________________________________________________________________________________________________|***" << endl;
-		cout << endl << "***|" << "   I----->" << "  New Game|";
-		cout << "                                                                                                                 |***" << endl;
-		cout << endl << "***|" << "  II----->" << "   Credits|";
-		cout << "                                                                                                                 |***" << endl;
-		cout << endl << "***|" << " III----->" << "   Options|";
-		cout << "                                                                                                                 |***" << endl;
-		cout << endl << "***|" << "  IV----->" << "      Exit|";
-		cout << "                                                                                                                 |***" << endl;
-		cout << endl << "***|______________________________________________________________________________________________________________________________________|***" << endl;
-		cout << endl << "**********************************************************************************************************************************************" << endl;
-		cout << endl;
-		cout << endl;
-		cout << endl;
-		cout << endl;
-		cout << endl;
-		cout << endl;
-		cout << endl << "                                                                                                                               ...by Dies_Irae" << endl;;
-
+		//func to dsp main menu
+		main_menu_view();
 		cin >> coice;
 		cout << "\n" << endl;
 
@@ -227,6 +193,7 @@ void MainMenu() {
 			start_new_game();
 		}
 		if (coice == 3) {
+			options_menu_view();
 		}
 		if (coice == 4) {
 			break;

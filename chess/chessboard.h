@@ -16,6 +16,8 @@ extern vector <string> statistics;
 extern int M;
 //wrong turn pointer
 extern bool propusk;
+//for menu opyions view figure
+extern int FigureView;
 
 class chessboard {
 private:
@@ -239,81 +241,277 @@ public:
 		}
 	}
 
-	//set figure on board for new game(and set its waight and color in figurein)
-	void set_pice_newgame() {
-		int ptr0 = 0;
-		for (int ptr1 = 2; ptr1 < 10; ptr1++) {
-			for (int ptr2 = 2; ptr2 < 10; ptr2++) {
-				//rooks
-				if (ptr1 == 2 && (ptr2 == 2 || ptr2 == 9)) {
-					this->board[ptr1][ptr2] = -4;
-					//string RRR(get_ch_bR(), sizeof(get_ch_bR()+1));
-					this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, -4, "bR");
-					ptr0++;
-				}
-				if (ptr1 == 9 && (ptr2 == 2 || ptr2 == 9)) {
-					this->board[ptr1][ptr2] = 4;
-					this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, 4, "wR");
-					ptr0++;
-				}
-				//horses
-				if (ptr1 == 2 && (ptr2 == 3 || ptr2 == 8)) {
-					this->board[ptr1][ptr2] = -2;
-					this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, -2, "bH");
-					ptr0++;
-				}
-				if (ptr1 == 9 && (ptr2 == 3 || ptr2 == 8)) {
-					this->board[ptr1][ptr2] = 2;
-					this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, 2, "wH");
-					ptr0++;
-				}
-				//bishop
-				if (ptr1 == 2 && (ptr2 == 4 || ptr2 == 7)) {
-					this->board[ptr1][ptr2] = -3;
-					this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, -3, "bB");
-					ptr0++;
-				}
-				if (ptr1 == 9 && (ptr2 == 4 || ptr2 == 7)) {
-					this->board[ptr1][ptr2] = 3;
-					this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, 3, "wB");
-					ptr0++;
-				}
-				//queen
-				if (ptr1 == 2 && ptr2 == 5) {
-					this->board[ptr1][ptr2] = -5;
-					this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, -5, "bQ");
-					ptr0++;
-				}
-				if (ptr1 == 9 && ptr2 == 5) {
-					this->board[ptr1][ptr2] = 5;
-					this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, 5, "wQ");
-					ptr0++;
-				}
-				//king
-				if (ptr1 == 2 && ptr2 == 6) {
-					this->board[ptr1][ptr2] = -6;
-					this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, -6, "bK");
-					ptr0++;
-				}
-				if (ptr1 == 9 && ptr2 == 6) {
-					this->board[ptr1][ptr2] = 6;
-					this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, 6, "wK");
-					ptr0++;
-				}
-				//pawns
-				if (ptr1 == 3) {
-					this->board[ptr1][ptr2] = -1;
-					this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, -1, "bP");
-					ptr0++;
-				}
-				if (ptr1 == 8) {
-					this->board[ptr1][ptr2] = 1;
-					this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, 1, "wP");
-					ptr0++;
+	//utf 8 
+	void set_pice_newgame_utf() {
+			int ptr0 = 0;
+			for (int ptr1 = 2; ptr1 < 10; ptr1++) {
+				for (int ptr2 = 2; ptr2 < 10; ptr2++) {
+					//rooks
+					if (ptr1 == 2 && (ptr2 == 2 || ptr2 == 9)) {
+						this->board[ptr1][ptr2] = -4;
+						//utf8 - decode
+						wchar_t bK[] = L"\u265C";
+						int bufferSize = WideCharToMultiByte(CP_UTF8, 0, bK, -1, NULL, 0, NULL, NULL);
+						char* BK = new char[bufferSize];
+						WideCharToMultiByte(CP_UTF8, 0, bK, -1, BK, bufferSize, NULL, NULL);
+						char test[sizeof(BK)];
+						strncpy_s(test, BK, sizeof(BK));
+						string SS;
+						SS.assign(test, sizeof(test));
+						SS += "  ";
+						this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, -4, SS);
+						ptr0++;
+					}
+					if (ptr1 == 9 && (ptr2 == 2 || ptr2 == 9)) {
+						this->board[ptr1][ptr2] = 4;
+						//utf8 - decode
+						wchar_t bK[] = L"\u2656";
+						int bufferSize = WideCharToMultiByte(CP_UTF8, 0, bK, -1, NULL, 0, NULL, NULL);
+						char* BK = new char[bufferSize];
+						WideCharToMultiByte(CP_UTF8, 0, bK, -1, BK, bufferSize, NULL, NULL);
+						char test[sizeof(BK)];
+						strncpy_s(test, BK, sizeof(BK));
+						string SS;
+						SS.assign(test, sizeof(test));
+						SS += "  ";
+						this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, 4, SS);
+						ptr0++;
+					}
+					//horses
+					if (ptr1 == 2 && (ptr2 == 3 || ptr2 == 8)) {
+						this->board[ptr1][ptr2] = -2;
+						//utf8 - decode
+						wchar_t bK[] = L"\u265E";
+						int bufferSize = WideCharToMultiByte(CP_UTF8, 0, bK, -1, NULL, 0, NULL, NULL);
+						char* BK = new char[bufferSize];
+						WideCharToMultiByte(CP_UTF8, 0, bK, -1, BK, bufferSize, NULL, NULL);
+						char test[sizeof(BK)];
+						strncpy_s(test, BK, sizeof(BK));
+						string SS;
+						SS.assign(test, sizeof(test));
+						SS += "  ";
+						this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, -2, SS);
+						ptr0++;
+					}
+					if (ptr1 == 9 && (ptr2 == 3 || ptr2 == 8)) {
+						this->board[ptr1][ptr2] = 2;
+						//utf8 - decode
+						wchar_t bK[] = L"\u2658";
+						int bufferSize = WideCharToMultiByte(CP_UTF8, 0, bK, -1, NULL, 0, NULL, NULL);
+						char* BK = new char[bufferSize];
+						WideCharToMultiByte(CP_UTF8, 0, bK, -1, BK, bufferSize, NULL, NULL);
+						char test[sizeof(BK)];
+						strncpy_s(test, BK, sizeof(BK));
+						string SS;
+						SS.assign(test, sizeof(test));
+						SS += "  ";
+						this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, 2, SS);
+						ptr0++;
+					}
+					//bishop
+					if (ptr1 == 2 && (ptr2 == 4 || ptr2 == 7)) {
+						this->board[ptr1][ptr2] = -3;
+						//utf8 - decode
+						wchar_t bK[] = L"\u265D";
+						int bufferSize = WideCharToMultiByte(CP_UTF8, 0, bK, -1, NULL, 0, NULL, NULL);
+						char* BK = new char[bufferSize];
+						WideCharToMultiByte(CP_UTF8, 0, bK, -1, BK, bufferSize, NULL, NULL);
+						char test[sizeof(BK)];
+						strncpy_s(test, BK, sizeof(BK));
+						string SS;
+						SS.assign(test, sizeof(test));
+						SS += "  ";
+						this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, -3, SS);
+						ptr0++;
+					}
+					if (ptr1 == 9 && (ptr2 == 4 || ptr2 == 7)) {
+						this->board[ptr1][ptr2] = 3;
+						//utf8 - decode
+						wchar_t bK[] = L"\u2657";
+						int bufferSize = WideCharToMultiByte(CP_UTF8, 0, bK, -1, NULL, 0, NULL, NULL);
+						char* BK = new char[bufferSize];
+						WideCharToMultiByte(CP_UTF8, 0, bK, -1, BK, bufferSize, NULL, NULL);
+						char test[sizeof(BK)];
+						strncpy_s(test, BK, sizeof(BK));
+						string SS;
+						SS.assign(test, sizeof(test));
+						SS += "  ";
+						this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, 3, SS);
+						ptr0++;
+					}
+					//queen
+					if (ptr1 == 2 && ptr2 == 5) {
+						this->board[ptr1][ptr2] = -5;
+						//utf8 - decode
+						wchar_t bK[] = L"\u265B";
+						int bufferSize = WideCharToMultiByte(CP_UTF8, 0, bK, -1, NULL, 0, NULL, NULL);
+						char* BK = new char[bufferSize];
+						WideCharToMultiByte(CP_UTF8, 0, bK, -1, BK, bufferSize, NULL, NULL);
+						char test[sizeof(BK)];
+						strncpy_s(test, BK, sizeof(BK));
+						string SS;
+						SS.assign(test, sizeof(test));
+						SS += "  ";
+						this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, -5, SS);
+						ptr0++;
+					}
+					if (ptr1 == 9 && ptr2 == 5) {
+						this->board[ptr1][ptr2] = 5;
+						//utf8 - decode
+						wchar_t bK[] = L"\u2655";
+						int bufferSize = WideCharToMultiByte(CP_UTF8, 0, bK, -1, NULL, 0, NULL, NULL);
+						char* BK = new char[bufferSize];
+						WideCharToMultiByte(CP_UTF8, 0, bK, -1, BK, bufferSize, NULL, NULL);
+						char test[sizeof(BK)];
+						strncpy_s(test, BK, sizeof(BK));
+						string SS;
+						SS.assign(test, sizeof(test));
+						SS += "  ";
+						this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, 5, SS);
+						ptr0++;
+					}
+					//king
+					if (ptr1 == 2 && ptr2 == 6) {
+						this->board[ptr1][ptr2] = -6;
+						//utf8 - decode
+						wchar_t bK[] = L"\u265A";
+						int bufferSize = WideCharToMultiByte(CP_UTF8, 0, bK, -1, NULL, 0, NULL, NULL);
+						char* BK = new char[bufferSize];
+						WideCharToMultiByte(CP_UTF8, 0, bK, -1, BK, bufferSize, NULL, NULL);
+						char test[sizeof(BK)];
+						strncpy_s(test, BK, sizeof(BK));
+						string SS;
+						SS.assign(test, sizeof(test));
+						SS += "  ";
+						this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, -6, SS);
+						ptr0++;
+					}
+					if (ptr1 == 9 && ptr2 == 6) {
+						this->board[ptr1][ptr2] = 6;
+						//utf8 - decode
+						wchar_t bK[] = L"\u2654";
+						int bufferSize = WideCharToMultiByte(CP_UTF8, 0, bK, -1, NULL, 0, NULL, NULL);
+						char* BK = new char[bufferSize];
+						WideCharToMultiByte(CP_UTF8, 0, bK, -1, BK, bufferSize, NULL, NULL);
+						char test[sizeof(BK)];
+						strncpy_s(test, BK, sizeof(BK));
+						string SS;
+						SS.assign(test, sizeof(test));
+						SS += "  ";
+						this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, 6, SS);
+						ptr0++;
+					}
+					//pawns
+					if (ptr1 == 3) {
+						this->board[ptr1][ptr2] = -1;
+						//utf8 - decode
+						wchar_t bK[] = L"\u265F";
+						int bufferSize = WideCharToMultiByte(CP_UTF8, 0, bK, -1, NULL, 0, NULL, NULL);
+						char* BK = new char[bufferSize];
+						WideCharToMultiByte(CP_UTF8, 0, bK, -1, BK, bufferSize, NULL, NULL);
+						char test[sizeof(BK)];
+						strncpy_s(test, BK, sizeof(BK));
+						string SS;
+						SS.assign(test, sizeof(test));
+						SS += "  ";
+						this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, -1, SS);
+						ptr0++;
+					}
+					if (ptr1 == 8) {
+						this->board[ptr1][ptr2] = 1;
+						//utf8 - decode
+						wchar_t bK[] = L"\u2659";
+						int bufferSize = WideCharToMultiByte(CP_UTF8, 0, bK, -1, NULL, 0, NULL, NULL);
+						char* BK = new char[bufferSize];
+						WideCharToMultiByte(CP_UTF8, 0, bK, -1, BK, bufferSize, NULL, NULL);
+						char test[sizeof(BK)];
+						strncpy_s(test, BK, sizeof(BK));
+						string SS;
+						SS.assign(test, sizeof(test));
+						SS += "  ";
+						this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, 1, SS);
+						ptr0++;
+					}
 				}
 			}
 		}
-	}
+	
+	//simple string
+	void set_pice_newgame_simple() {
+			int ptr0 = 0;
+			for (int ptr1 = 2; ptr1 < 10; ptr1++) {
+				for (int ptr2 = 2; ptr2 < 10; ptr2++) {
+					//rooks
+					if (ptr1 == 2 && (ptr2 == 2 || ptr2 == 9)) {
+						this->board[ptr1][ptr2] = -4;
+						//string RRR(get_ch_bR(), sizeof(get_ch_bR()+1));
+						this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, -4, "bR");
+						ptr0++;
+					}
+					if (ptr1 == 9 && (ptr2 == 2 || ptr2 == 9)) {
+						this->board[ptr1][ptr2] = 4;
+						this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, 4, "wR");
+						ptr0++;
+					}
+					//horses
+					if (ptr1 == 2 && (ptr2 == 3 || ptr2 == 8)) {
+						this->board[ptr1][ptr2] = -2;
+						this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, -2, "bH");
+						ptr0++;
+					}
+					if (ptr1 == 9 && (ptr2 == 3 || ptr2 == 8)) {
+						this->board[ptr1][ptr2] = 2;
+						this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, 2, "wH");
+						ptr0++;
+					}
+					//bishop
+					if (ptr1 == 2 && (ptr2 == 4 || ptr2 == 7)) {
+						this->board[ptr1][ptr2] = -3;
+						this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, -3, "bB");
+						ptr0++;
+					}
+					if (ptr1 == 9 && (ptr2 == 4 || ptr2 == 7)) {
+						this->board[ptr1][ptr2] = 3;
+						this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, 3, "wB");
+						ptr0++;
+					}
+					//queen
+					if (ptr1 == 2 && ptr2 == 5) {
+						this->board[ptr1][ptr2] = -5;
+						this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, -5, "bQ");
+						ptr0++;
+					}
+					if (ptr1 == 9 && ptr2 == 5) {
+						this->board[ptr1][ptr2] = 5;
+						this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, 5, "wQ");
+						ptr0++;
+					}
+					//king
+					if (ptr1 == 2 && ptr2 == 6) {
+						this->board[ptr1][ptr2] = -6;
+						this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, -6, "bK");
+						ptr0++;
+					}
+					if (ptr1 == 9 && ptr2 == 6) {
+						this->board[ptr1][ptr2] = 6;
+						this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, 6, "wK");
+						ptr0++;
+					}
+					//pawns
+					if (ptr1 == 3) {
+						this->board[ptr1][ptr2] = -1;
+						this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, -1, "bP");
+						ptr0++;
+					}
+					if (ptr1 == 8) {
+						this->board[ptr1][ptr2] = 1;
+						this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, 1, "wP");
+						ptr0++;
+					}
+				}
+			}
+		}
+	
 	//set figure function for complete movement 
 	void set_pice(int x, int y, int fig) {
 		//по отношению к массиву боард все координаты идут с увеличением на 1
@@ -588,7 +786,12 @@ public:
 	//END_GAME
 	void end_game() {
 		stat_clear(9);
-		set_pice_newgame();
+		if (FigureView == 1) {
+			set_pice_newgame_simple();
+		}
+		else if (FigureView == 2) {
+			set_pice_newgame_utf();
+		}
 		statistics.clear();
 		M = 0;
 	}

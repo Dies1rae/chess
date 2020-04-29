@@ -20,6 +20,8 @@ bool propusk = 0;
 //create board and figure
 chessboard* test = new chessboard();
 int gametime = 0;
+//for menu opyions view figure
+int FigureView = 0;
 
 void hidecursor(){
 	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -40,8 +42,19 @@ void start_new_game() {
 	cor.Y = 0;
 	SetConsoleCursorPosition(hConsole, cor);
 	//new game set board and figure
+	//options FigureView
 	system("CLS");
-	test->set_pice_newgame();
+	switch (FigureView){
+	default:
+		test->set_pice_newgame_simple();
+		break;
+	case 1:
+		test->set_pice_newgame_simple();
+		break;
+	case 2:
+		test->set_pice_newgame_utf();
+		break;
+	}
 	test->get_board();
 	
 	//main game loop
@@ -164,23 +177,15 @@ void start_new_game() {
 }
 
 void MainMenu() {
-	wchar_t bK[] = L"\u265A";
-	int bufferSize = WideCharToMultiByte(CP_UTF8, 0, bK, -1, NULL, 0, NULL, NULL);
-	char* BK = new char[bufferSize];
-	WideCharToMultiByte(CP_UTF8, 0, bK, -1, BK, bufferSize, NULL, NULL);
-	char test[sizeof(BK)];
-	strncpy_s(test, BK, sizeof(BK));
-	string SS;
-	SS.assign(test, sizeof(test) + 1);
-	cout << BK << endl << test << endl << SS << endl;
-	system("PAUSE");
-
-
 	SetConsoleOutputCP(CP_UTF8);
 	HWND consoleWindow = GetConsoleWindow();
 	SetWindowPos(consoleWindow, 0, 0, 0, 300, 300, SWP_NOSIZE | SWP_NOZORDER);
 	system("mode con cols=160 lines=30");
 	int coice = 9;
+	//test for game figure type
+	cout << "Choose chess figure type(1 - Simple string | 2 - Unicode figure(need gothic console font))" << endl;
+	cin >> FigureView;
+	//govno menu
 	while (coice != 0){
 		hidecursor();
 		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -220,6 +225,8 @@ void MainMenu() {
 
 		if (coice == 1) {
 			start_new_game();
+		}
+		if (coice == 3) {
 		}
 		if (coice == 4) {
 			break;

@@ -770,7 +770,37 @@ public:
 				res[0] = 1;
 			}
 		}
+		if (t == 4 || t == -4) {
+			can_attack(res, x, y, c, z, t);
+		}
 		return res;
+	}
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	void can_attack(vector <int> res,int x, int y, int c, int z, int t) {
+		if (res[0] == 1) {
+			if (x == c) {
+				for (int ptr0 = 2; ptr0 < size(this->board) - 2; ptr0++) {
+					for (int ptr1 = 2; ptr1 < size(this->board) - 2; ptr1++) {
+						if (ptr0 == x) {
+							if (this->board[ptr0][ptr1 + 1] != 0 && ptr1 < z) {
+								res[0] == 0;
+							}
+						}
+					}
+				}
+			}
+			if (y == z) {
+				for (int ptr0 = 2; ptr0 < size(this->board) - 2; ptr0++) {
+					for (int ptr1 = 2; ptr1 < size(this->board) - 2; ptr1++) {
+						if (ptr1 == y) {
+							if (this->board[ptr0 + 1][ptr1] != 0 && ptr1 < y) {
+								res[0] == 0;
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 
 	Figure get_fig_by_coord(int x, int y) {

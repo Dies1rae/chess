@@ -80,7 +80,7 @@ void start_new_game() {
 			gametime += white_t->GetDuration();
 			test->moove_pice(a, b - 96, c, d - 96);
 			if (propusk == true) {
-				M++;
+				M--;
 				if (statistics.size() != 0) {
 					statistics.pop_back();
 				}
@@ -108,7 +108,7 @@ void start_new_game() {
 			//move---
 			test->moove_pice(a, b - 96, c, d - 96);
 			if (propusk == true) {
-				M++;
+				M--;
 				if (statistics.size() != 0) {
 					statistics.pop_back();
 				}

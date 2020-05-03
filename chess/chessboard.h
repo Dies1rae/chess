@@ -668,7 +668,7 @@ public:
 		res.push_back(0);
 		//pawn ---WORKS FINE
 		if (t == 1 || t == -1) {
-			//if in diagonals - figure we are can attack
+			//if in diagonals - figure - we are can attack
 			if (get_fig_by_coord(c, z).get_figure_type() != 0) {
 				if ((y + 1 == z || y - 1 == z) && abs(c - x) == 1) {
 					res.push_back(c);
@@ -775,7 +775,7 @@ public:
 		}
 		return res;
 	}
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	//fnct for see if figure move realy clear on desk(no one else figure on track)
 	int can_attack(vector <int> res,int x, int y, int c, int z, int t) {
 		int A = 1;
 		//rooks --done works fine
@@ -810,6 +810,143 @@ public:
 							A = 0;
 						}
 					}
+				}
+			}
+		}
+		//rooks --bishop works fine
+		if (t == 3 || t == -3) {
+			//45
+			if (x > c && y < z) {
+				for (int ptrx = x-1, ptry = y+1; ptrx > c; ptrx--, ptry++) {
+					for (auto ptrf : this->figurein) {
+						if (ptrf->get_figure_coord()[0] == ptrx && ptrf->get_figure_coord()[1] == ptry) {
+							A = 0;
+						}
+					}
+				}
+			}
+			//315
+			if (x > c && y > z) {
+				for (int ptrx = x - 1, ptry = y - 1; ptrx > c; ptrx--, ptry--) {
+					for (auto ptrf : this->figurein) {
+						if (ptrf->get_figure_coord()[0] == ptrx && ptrf->get_figure_coord()[1] == ptry) {
+							A = 0;
+						}
+					}
+				}
+			}
+			//225
+			if (x < c && y > z) {
+				for (int ptrx = x + 1, ptry = y - 1; ptrx < c; ptrx++, ptry--) {
+					for (auto ptrf : this->figurein) {
+						if (ptrf->get_figure_coord()[0] == ptrx && ptrf->get_figure_coord()[1] == ptry) {
+							A = 0;
+						}
+					}
+				}
+			}
+			//135
+			if (x < c && y < z) {
+				for (int ptrx = x + 1, ptry = y + 1; ptrx < c; ptrx++, ptry++) {
+					for (auto ptrf : this->figurein) {
+						if (ptrf->get_figure_coord()[0] == ptrx && ptrf->get_figure_coord()[1] == ptry) {
+							A = 0;
+						}
+					}
+				}
+			}
+		}
+		//rooks --queen works fine
+		if (t == 5 || t == -5) {
+			//45
+			if (x > c && y < z) {
+				for (int ptrx = x - 1, ptry = y + 1; ptrx > c; ptrx--, ptry++) {
+					for (auto ptrf : this->figurein) {
+						if (ptrf->get_figure_coord()[0] == ptrx && ptrf->get_figure_coord()[1] == ptry) {
+							A = 0;
+						}
+					}
+				}
+			}
+			//315
+			if (x > c && y > z) {
+				for (int ptrx = x - 1, ptry = y - 1; ptrx > c; ptrx--, ptry--) {
+					for (auto ptrf : this->figurein) {
+						if (ptrf->get_figure_coord()[0] == ptrx && ptrf->get_figure_coord()[1] == ptry) {
+							A = 0;
+						}
+					}
+				}
+			}
+			//225
+			if (x < c && y > z) {
+				for (int ptrx = x + 1, ptry = y - 1; ptrx < c; ptrx++, ptry--) {
+					for (auto ptrf : this->figurein) {
+						if (ptrf->get_figure_coord()[0] == ptrx && ptrf->get_figure_coord()[1] == ptry) {
+							A = 0;
+						}
+					}
+				}
+			}
+			//135
+			if (x < c && y < z) {
+				for (int ptrx = x + 1, ptry = y + 1; ptrx < c; ptrx++, ptry++) {
+					for (auto ptrf : this->figurein) {
+						if (ptrf->get_figure_coord()[0] == ptrx && ptrf->get_figure_coord()[1] == ptry) {
+							A = 0;
+						}
+					}
+				}
+			}
+			//90 - 270
+			if (x == c) {
+				//90
+				if (y > z) {
+					for (auto ptr0 : this->figurein) {
+						if ((ptr0->get_figure_coord()[0] == x) && (ptr0->get_figure_coord()[1] < y && ptr0->get_figure_coord()[1] > z)) {
+							A = 0;
+						}
+					}
+				}
+				//270
+				if (y < z) {
+					for (auto ptr0 : this->figurein) {
+						if ((ptr0->get_figure_coord()[0] == x) && (ptr0->get_figure_coord()[1] > y && ptr0->get_figure_coord()[1] < z)) {
+							A = 0;
+						}
+					}
+				}
+			}
+			//0 - 180
+			if (y == z) {
+				//0
+				if (x > c) {
+					for (auto ptr0 : this->figurein) {
+						if ((ptr0->get_figure_coord()[1] == y) && (ptr0->get_figure_coord()[0] < x && ptr0->get_figure_coord()[0] > c)) {
+							A = 0;
+						}
+					}
+				}
+				//180
+				if (x < c) {
+					for (auto ptr0 : this->figurein) {
+						if ((ptr0->get_figure_coord()[1] == y) && (ptr0->get_figure_coord()[0] > x && ptr0->get_figure_coord()[0] < c)) {
+							A = 0;
+						}
+					}
+				}
+			}
+		}
+		//pawn - step backward
+		if (t == 1 || t == -1) {
+			if (t > 0) {
+				if (c > x) {
+					A = 0;
+				}
+			}
+			if (t < 0) {
+				if (c < x) {
+					A = 0;
 				}
 			}
 		}

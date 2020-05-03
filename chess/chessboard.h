@@ -258,7 +258,8 @@ public:
 						strncpy_s(test, BK, sizeof(BK));
 						string SS;
 						SS.assign(test, sizeof(test));
-						SS += "  ";
+						SS.insert(0, " ");
+						SS += " ";
 						this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, -4, SS);
 						ptr0++;
 					}
@@ -273,7 +274,8 @@ public:
 						strncpy_s(test, BK, sizeof(BK));
 						string SS;
 						SS.assign(test, sizeof(test));
-						SS += "  ";
+						SS.insert(0, " ");
+						SS += " ";
 						this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, 4, SS);
 						ptr0++;
 					}
@@ -289,7 +291,8 @@ public:
 						strncpy_s(test, BK, sizeof(BK));
 						string SS;
 						SS.assign(test, sizeof(test));
-						SS += "  ";
+						SS.insert(0, " ");
+						SS += " ";
 						this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, -2, SS);
 						ptr0++;
 					}
@@ -304,7 +307,8 @@ public:
 						strncpy_s(test, BK, sizeof(BK));
 						string SS;
 						SS.assign(test, sizeof(test));
-						SS += "  ";
+						SS.insert(0, " ");
+						SS += " ";
 						this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, 2, SS);
 						ptr0++;
 					}
@@ -320,7 +324,8 @@ public:
 						strncpy_s(test, BK, sizeof(BK));
 						string SS;
 						SS.assign(test, sizeof(test));
-						SS += "  ";
+						SS.insert(0, " ");
+						SS += " ";
 						this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, -3, SS);
 						ptr0++;
 					}
@@ -335,7 +340,8 @@ public:
 						strncpy_s(test, BK, sizeof(BK));
 						string SS;
 						SS.assign(test, sizeof(test));
-						SS += "  ";
+						SS.insert(0, " ");
+						SS += " ";
 						this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, 3, SS);
 						ptr0++;
 					}
@@ -351,7 +357,8 @@ public:
 						strncpy_s(test, BK, sizeof(BK));
 						string SS;
 						SS.assign(test, sizeof(test));
-						SS += "  ";
+						SS.insert(0, " ");
+						SS += " ";
 						this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, -5, SS);
 						ptr0++;
 					}
@@ -366,7 +373,8 @@ public:
 						strncpy_s(test, BK, sizeof(BK));
 						string SS;
 						SS.assign(test, sizeof(test));
-						SS += "  ";
+						SS.insert(0, " ");
+						SS += " ";
 						this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, 5, SS);
 						ptr0++;
 					}
@@ -382,7 +390,8 @@ public:
 						strncpy_s(test, BK, sizeof(BK));
 						string SS;
 						SS.assign(test, sizeof(test));
-						SS += "  ";
+						SS.insert(0, " ");
+						SS += " ";
 						this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, -6, SS);
 						ptr0++;
 					}
@@ -397,7 +406,8 @@ public:
 						strncpy_s(test, BK, sizeof(BK));
 						string SS;
 						SS.assign(test, sizeof(test));
-						SS += "  ";
+						SS.insert(0, " ");
+						SS += " ";
 						this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, 6, SS);
 						ptr0++;
 					}
@@ -413,7 +423,8 @@ public:
 						strncpy_s(test, BK, sizeof(BK));
 						string SS;
 						SS.assign(test, sizeof(test));
-						SS += "  ";
+						SS.insert(0, " ");
+						SS += " ";
 						this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, -1, SS);
 						ptr0++;
 					}
@@ -428,7 +439,8 @@ public:
 						strncpy_s(test, BK, sizeof(BK));
 						string SS;
 						SS.assign(test, sizeof(test));
-						SS += "  ";
+						SS.insert(0, " ");
+						SS += " ";
 						this->figurein[ptr0] = new Figure(ptr1 - 1, ptr2 - 1, 1, SS);
 						ptr0++;
 					}

@@ -1,0 +1,3 @@
+# chess
+Simple fun with chess game for 2 player
+Some dump chess game made by me...

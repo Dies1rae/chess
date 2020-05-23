@@ -134,3 +134,43 @@ void figure_options_menu_view() {
 		options_menu_view();
 	}
 }
+//about menu
+void Credits_menu() {
+	hidecursor();
+	system("CLS");
+	int optm;
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	cout << endl << "**********************************************************************************************************************************************" << endl;
+	cout << endl << "***|______________________________________________________________________________________________________________________________________|***" << endl;
+	cout << endl << "***|                                                  ";
+	SetConsoleTextAttribute(hConsole, BACKGROUND_RED | BACKGROUND_BLUE | BACKGROUND_GREEN | 4);
+	cout << "Simple CHESS";
+	SetConsoleTextAttribute(hConsole, 7);
+	cout << "                                                                        |***" << endl;
+	cout << endl << "***|                                                     ";
+	SetConsoleTextAttribute(hConsole, BACKGROUND_RED | BACKGROUND_BLUE | BACKGROUND_GREEN | 4);
+	cout << "Credits";
+	SetConsoleTextAttribute(hConsole, 7);
+	cout << "                                                                          |***" << endl;
+	cout << endl << "***|______________________________________________________________________________________________________________________________________|***" << endl;
+	cout << endl << "***|" << "   I----->" << "  This dump version of chess made Poltavskiy Nick aka. Dies Irae|";
+	cout << "                                                           |***" << endl;
+	cout << endl << "***|" << "  II----->" << "             Back|";
+	cout << "                                                                                                          |***" << endl;
+	cout << endl << "***|______________________________________________________________________________________________________________________________________|***" << endl;
+	cout << endl << "**********************************************************************************************************************************************" << endl;
+	cout << endl;
+	cout << endl;
+	cout << endl;
+	cout << endl;
+	cout << endl;
+	cout << endl;
+	cout << endl << "                                                                                                                               ...by Dies_Irae" << endl;
+	cin >> optm;
+	if (optm == 1) {
+		Credits_menu();
+	}
+	else if (optm == 2) {
+		main_menu_view();
+	}
+}

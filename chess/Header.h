@@ -192,6 +192,9 @@ void MainMenu() {
 		if (coice == 1) {
 			start_new_game();
 		}
+		if (coice == 2) {
+			Credits_menu();
+		}
 		if (coice == 3) {
 			options_menu_view();
 		}
